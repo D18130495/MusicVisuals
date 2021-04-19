@@ -4,8 +4,8 @@ import processing.core.PApplet;
 
 public class Control extends PApplet {
 
-    int controlNum = 0;
-    
+    public int controlNum = 0;
+
     public int getControlNum() {
         return controlNum;
     }
@@ -13,6 +13,8 @@ public class Control extends PApplet {
     public void setControlNum(int controlNum) {
         this.controlNum = controlNum;
     }
+
+    YushunVisual visual = new YushunVisual();
 
     public void settings() {
         size(128, 512);
@@ -34,23 +36,23 @@ public class Control extends PApplet {
     public void mousePressed()
 	{
         if(mouseY < map(1, 0, 5, 0, height)) {
-            controlNum = 1;
             println("Mouse 1");
+            this.visual.setWhich(1);
         }
 		else if(mouseY < map(2, 0, 5, 0, height)) {
-            controlNum = 2;
             println("Mouse 2");
+            this.visual.setWhich(2);
         }
         else if(mouseY < map(3, 0, 5, 0, height)) {
-            controlNum = 3;
+            setControlNum(3);
             println("Mouse 3");
         }
         else if(mouseY < map(4, 0, 5, 0, height)) {
-            controlNum = 4;
+            setControlNum(4);
             println("Mouse 4");
         }
         else if(mouseY < map(5, 0, 5, 0, height)) {
-            controlNum = 5;
+            setControlNum(5);
             println("Mouse 5");
         }	
 	}
@@ -59,4 +61,10 @@ public class Control extends PApplet {
         background(255, 100, 0);
         drawGrid();
     }
+
+    public void startUI()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch(a, this.visual);		
+	}
 }

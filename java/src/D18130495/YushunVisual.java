@@ -22,7 +22,15 @@ public class YushunVisual extends PApplet {
 
     float y = 200;
     float lerpedY = y;
-    int which = 0;
+    public int which;
+
+    public int getWhich() {
+        return which;
+    }
+
+    public void setWhich(int which) {
+        this.which = which;
+    }
 
     public void setup() {
         minim = new Minim(this);
@@ -35,19 +43,19 @@ public class YushunVisual extends PApplet {
         lerpedBuffer = new float[width];
     }
 
-    public void keyPressed() {
-        if(keyCode >= '0' && keyCode <= '5') {
-            which = keyCode - '0';
-        }
-        if(keyCode == ' ') {
-            if(ap.isPlaying()) {
-                ap.pause();
-            } else {
-                //ap.rewind();
-                ap.play();
-            }
-        }
-    }
+    // public void keyPressed() {
+    //     if(keyCode >= '0' && keyCode <= '5') {
+    //         which = keyCode - '0';
+    //     }
+    //     if(keyCode == ' ') {
+    //         if(ap.isPlaying()) {
+    //             ap.pause();
+    //         } else {
+    //             //ap.rewind();
+    //             ap.play();
+    //         }
+    //     }
+    // }
 
     float lerpedAverage = 0;
 
@@ -58,8 +66,9 @@ public class YushunVisual extends PApplet {
         float average = 0;
         float sum = 0;
         float lastX = width / 2, lastY = height / 2;
+        print(which);
 
-        switch (which)
+        switch (getWhich())
         {
             case 0:
             {
