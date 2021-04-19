@@ -6,18 +6,10 @@ public class Control extends PApplet {
 
     public int controlNum = 0;
 
-    public int getControlNum() {
-        return controlNum;
-    }
-
-    public void setControlNum(int controlNum) {
-        this.controlNum = controlNum;
-    }
-
     YushunVisual visual = new YushunVisual();
 
     public void settings() {
-        size(128, 512);
+        size(156, 512);
     }
 
     public void setup() {
@@ -26,42 +18,48 @@ public class Control extends PApplet {
 
     void drawGrid()
     {
+        float lh;
+        stroke(128, 128, 128); //gray dividing line
+        textAlign(CENTER, CENTER);
         for(int x = 1 ; x <= 4; x++)
         {
-            float lh = map(x, 0, 5, 0, height);
+            lh = map(x, 0, 5, 0, height);
             line(0, lh, width, lh); 
         }
+        textSize(16);
+        fill(255, 255, 255);
+        text("Start Visual", width / 2, height / 10);
+        text("Start Visual", width / 2, height / 10 * 3);
+        text("Start Visual", width / 2, height / 10 * 5);
+        text("Start Visual", width / 2, height / 10 * 7);
+        text("Start Visual", width / 2, height / 10 * 9);
     }
 
     public void mousePressed()
 	{
         if(mouseY < map(1, 0, 5, 0, height)) {
-            println("Mouse 1");
-            this.visual.setWhich(1);
+            this.visual.keyPressed();
         }
 		else if(mouseY < map(2, 0, 5, 0, height)) {
-            println("Mouse 2");
-            this.visual.setWhich(2);
+            this.visual.setWhich(0);
         }
         else if(mouseY < map(3, 0, 5, 0, height)) {
-            setControlNum(3);
-            println("Mouse 3");
+            this.visual.setWhich(1);
         }
         else if(mouseY < map(4, 0, 5, 0, height)) {
-            setControlNum(4);
-            println("Mouse 4");
+            this.visual.setWhich(2);
         }
         else if(mouseY < map(5, 0, 5, 0, height)) {
-            setControlNum(5);
-            println("Mouse 5");
+            this.visual.setWhich(3);
         }	
 	}
 
     public void draw() {
-        background(255, 100, 0);
+        background(0); //black background
         drawGrid();
     }
 
+    //call the YushunVisual and run it
     public void startUI()
 	{
 		String[] a = {"MAIN"};

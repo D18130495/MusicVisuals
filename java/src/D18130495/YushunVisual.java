@@ -16,13 +16,13 @@ public class YushunVisual extends PApplet {
     float[] lerpedBuffer;
 
     public void settings() {
-        size(512, 512);
+        size(1000, 640);
         //fullScreen(P3D, SPAN);
     }
 
     float y = 200;
     float lerpedY = y;
-    public int which;
+    public int which = 0;
 
     public int getWhich() {
         return which;
@@ -43,19 +43,14 @@ public class YushunVisual extends PApplet {
         lerpedBuffer = new float[width];
     }
 
-    // public void keyPressed() {
-    //     if(keyCode >= '0' && keyCode <= '5') {
-    //         which = keyCode - '0';
-    //     }
-    //     if(keyCode == ' ') {
-    //         if(ap.isPlaying()) {
-    //             ap.pause();
-    //         } else {
-    //             //ap.rewind();
-    //             ap.play();
-    //         }
-    //     }
-    // }
+    //use to pause the visual
+    public void keyPressed() {
+        if(ap.isPlaying()) {
+            ap.pause();
+        } else {
+            ap.play();
+        }
+    }
 
     float lerpedAverage = 0;
 
@@ -66,9 +61,8 @@ public class YushunVisual extends PApplet {
         float average = 0;
         float sum = 0;
         float lastX = width / 2, lastY = height / 2;
-        print(which);
 
-        switch (getWhich())
+        switch (which)
         {
             case 0:
             {
@@ -132,27 +126,6 @@ public class YushunVisual extends PApplet {
                     //println(lerpedBuffer[i]);
                     lerpedBuffer[i] = lerp(lerpedBuffer[i], average, 0.1f);
                     rect(width / 2, height / 2, lerpedBuffer[i] * 2000, lerpedBuffer[i] * 2000);
-                }
-                break;
-            }
-            case 5:
-            {
-                float r = 1f;
-                int numPoints = 10;
-                float thetaInc = TWO_PI / (float)numPoints;
-                strokeWeight(2);
-                for(int i = 0; i < 512; i++)
-                {
-                    float c = map(i, 0, 300, 0, 255) % 150.0f;
-                    stroke(c, 255, 255, 100);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-                    float theta = i * (thetaInc + lerpedBuffer[i]);
-                    float x = width / 2 + sin(theta) * r;
-                    float y = height / 2 - cos(theta) * r;
-                    r += 0.5f + lerpedBuffer[i];
-                    line(lastX, lastY, x, y);
-                    lastX = x;
-                    lastY = y;
                 }
                 break;
             }
