@@ -40,6 +40,10 @@ public class YushunVisual extends Visual {
             getAudioPlayer().pause();
         } else {
             getAudioPlayer().play();
+            if(which == 0)
+            {
+                which = 1;
+            }
         }
     }
 
@@ -57,7 +61,9 @@ public class YushunVisual extends Visual {
         {
             case 0:
             {
-                text("Start Visual", 200, 200);
+                textSize(30);
+                text("Welcome to YushunVisual", 150, 200);
+                text("Press 'Start Visual' to start journey", 150, 300);
                 break;
             }
             case 1:

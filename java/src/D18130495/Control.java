@@ -1,10 +1,11 @@
 package D18130495;
 
-import processing.core.PApplet;
+import processing.core.*;
 
 public class Control extends PApplet {
 
-    public int controlNum = 0;
+    int count;
+    public int controlNum = 0; //use to display the menu text colour
 
     YushunVisual visual = new YushunVisual();
 
@@ -39,24 +40,53 @@ public class Control extends PApplet {
 	{
         if(mouseY < map(1, 0, 5, 0, height)) {
             this.visual.keyPressed();
+            if(count == 0) {
+                controlNum = 1;
+            }
+            count++;
         }
 		else if(mouseY < map(2, 0, 5, 0, height)) {
             this.visual.setWhich(1);
+            controlNum = 1;
         }
         else if(mouseY < map(3, 0, 5, 0, height)) {
             this.visual.setWhich(2);
+            controlNum = 2;
         }
         else if(mouseY < map(4, 0, 5, 0, height)) {
             this.visual.setWhich(3);
+            controlNum = 3;
         }
         else if(mouseY < map(5, 0, 5, 0, height)) {
             this.visual.setWhich(4);
+            controlNum = 4;
         }	
 	}
+
+    //use to indicate which options have been chosen
+    public void menuColour() {
+        if(controlNum == 1) {
+            fill(255, 0, 0);
+            text("Start Visual", width / 2, height / 10 * 3);
+        }
+        else if(controlNum == 2) {
+            fill(255, 0, 0);
+            text("Start Visual", width / 2, height / 10 * 5);
+        }
+        else if(controlNum == 3) {
+            fill(255, 0, 0);
+            text("Start Visual", width / 2, height / 10 * 7);
+        }
+        else if(controlNum == 4) {
+            fill(255, 0, 0);
+            text("Start Visual", width / 2, height / 10 * 9);
+        }
+    }
 
     public void draw() {
         background(0); //black background
         drawGrid();
+        menuColour();
     }
 
     //call the YushunVisual and run it
