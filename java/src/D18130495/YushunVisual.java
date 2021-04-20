@@ -5,19 +5,14 @@ import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import processing.core.PApplet;
+import ie.tudublin.Visual;
 
-public class YushunVisual extends PApplet {
-
-    Minim minim;
-    AudioInput ai; //Connect to mic
-    AudioBuffer ab; //Samples
-    AudioPlayer ap;
+public class YushunVisual extends Visual {
 
     float[] lerpedBuffer;
 
     public void settings() {
-        size(1000, 640);
-        //fullScreen(P3D, SPAN);
+        size(1024, 640);
     }
 
     float y = 200;
@@ -33,22 +28,18 @@ public class YushunVisual extends PApplet {
     }
 
     public void setup() {
-        minim = new Minim(this);
-        ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
-        ap = minim.loadFile("heroplanet.mp3", width);
-        ap.play();
-        ab = ai.mix; //buffer to the mic
-        ab = ap.mix; //buffer to the file
         colorMode(HSB);
+        startMinim();
+        loadAudio("heroplanet.mp3");
         lerpedBuffer = new float[width];
     }
 
     //use to pause the visual
     public void keyPressed() {
-        if(ap.isPlaying()) {
-            ap.pause();
+        if(getAudioPlayer().isPlaying()) {
+            getAudioPlayer().pause();
         } else {
-            ap.play();
+            getAudioPlayer().play();
         }
     }
 
@@ -66,67 +57,51 @@ public class YushunVisual extends PApplet {
         {
             case 0:
             {
-                for (int i = 0; i < ab.size(); i++) {
-                    float c = map(i, 0, ab.size(), 0, 255);
+                for (int i = 0; i < getAudioBuffer().size(); i++) {
+                    float c = map(i, 0, getAudioBuffer().size(), 0, 255);
                     stroke(c, 255, 255);
                     //println(lerpedBuffer[i]);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
                     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, halfHeight + lerpedBuffer[i] * halfHeight * 4, i);
                 }
                 break;
             }
             case 1:
             {
-                for (int i = 0; i < ab.size(); i++) {
-                    float c = map(i, 0, ab.size(), 0, 255);
+                for (int i = 0; i < getAudioBuffer().size(); i++) {
+                    float c = map(i, 0, getAudioBuffer().size(), 0, 255);
                     stroke(c, 255, 255);
-                    //println(lerpedBuffer[i]);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
                     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
                 }
                 break;
             }
             case 2:
             {
-                for (int i = 0; i < ab.size(); i++) {
-                    float c = map(i, 0, ab.size(), 0, 255);
-                    stroke(c, 255, 255);
-                    //println(lerpedBuffer[i]);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-                    line(0, i, lerpedBuffer[i] * halfHeight * 8, i);
-                    line(i, 0, i, lerpedBuffer[i] * halfHeight * 8);
-                    line(width, i, width - (lerpedBuffer[i] * halfHeight * 8), i);
-                    line(i, height, i, height - (lerpedBuffer[i] * halfHeight * 8));
-                }
+                // for (int i = 0; i < ab.size(); i++) {
+                //     float c = map(i, 0, ab.size(), 0, 255);
+                //     stroke(c, 255, 255);
+                //     //println(lerpedBuffer[i]);
+                //     lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+                //     line(0, i, lerpedBuffer[i] * halfHeight * 8, i);
+                //     line(i, 0, i, lerpedBuffer[i] * halfHeight * 8);
+                //     line(width, i, width - (lerpedBuffer[i] * halfHeight * 8), i);
+                //     line(i, height, i, height - (lerpedBuffer[i] * halfHeight * 8));
+                // }
                 break;
             }
             case 3:
             {
-                for (int i = 0; i < ab.size(); i++) {
-                    sum = sum + abs(ab.get(i));
-                    average = sum / (float)ab.size();
-                    float c = map(i, 0, ab.size(), 0, 255);
-                    stroke(c, 255, 255);
-                    noFill();
-                    //println(lerpedBuffer[i]);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], average, 0.1f);
-                    ellipse(width / 2, height / 2, lerpedBuffer[i] * 2000, lerpedBuffer[i] * 2000);
-                }
-                break;
-            }
-            case 4:
-            {
-                for (int i = 0; i < ab.size(); i++) {
-                    sum = sum + abs(ab.get(i));
-                    average = sum / (float)ab.size();
-                    float c = map(i, 0, ab.size(), 0, 255);
-                    stroke(c, 255, 255);
-                    noFill();
-                    rectMode(CENTER);
-                    //println(lerpedBuffer[i]);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], average, 0.1f);
-                    rect(width / 2, height / 2, lerpedBuffer[i] * 2000, lerpedBuffer[i] * 2000);
-                }
+                // for (int i = 0; i < ab.size(); i++) {
+                //     sum = sum + abs(ab.get(i));
+                //     average = sum / (float)ab.size();
+                //     float c = map(i, 0, ab.size(), 0, 255);
+                //     stroke(c, 255, 255);
+                //     noFill();
+                //     //println(lerpedBuffer[i]);
+                //     lerpedBuffer[i] = lerp(lerpedBuffer[i], average, 0.1f);
+                //     ellipse(width / 2, height / 2, lerpedBuffer[i] * 2000, lerpedBuffer[i] * 2000);
+                // }
                 break;
             }
         }
