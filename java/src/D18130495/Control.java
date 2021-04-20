@@ -41,16 +41,16 @@ public class Control extends PApplet {
             this.visual.keyPressed();
         }
 		else if(mouseY < map(2, 0, 5, 0, height)) {
-            this.visual.setWhich(0);
-        }
-        else if(mouseY < map(3, 0, 5, 0, height)) {
             this.visual.setWhich(1);
         }
-        else if(mouseY < map(4, 0, 5, 0, height)) {
+        else if(mouseY < map(3, 0, 5, 0, height)) {
             this.visual.setWhich(2);
         }
-        else if(mouseY < map(5, 0, 5, 0, height)) {
+        else if(mouseY < map(4, 0, 5, 0, height)) {
             this.visual.setWhich(3);
+        }
+        else if(mouseY < map(5, 0, 5, 0, height)) {
+            this.visual.setWhich(4);
         }	
 	}
 
