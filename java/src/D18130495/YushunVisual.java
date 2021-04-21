@@ -78,18 +78,7 @@ public class YushunVisual extends Visual {
             }
             case 2:
             {
-                for (int i = 0; i < getAudioBuffer().size(); i++) {
-                    float c = map(i, 0, getAudioBuffer().size(), 0, 255);
-                    stroke(c, 255, 255);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
-                    line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
-                }
-                
-                break;
-            }
-            case 3:
-            {
-               // for (int i = 0; i < ab.size(); i++) {
+             // for (int i = 0; i < ab.size(); i++) {
                 //     float c = map(i, 0, ab.size(), 0, 255);
                 //     stroke(c, 255, 255);
                 //     //println(lerpedBuffer[i]);
@@ -100,6 +89,17 @@ public class YushunVisual extends Visual {
                 //     line(i, height, i, height - (lerpedBuffer[i] * halfHeight * 8));
                 // }
                 break;
+            }
+            case 3:
+            {
+                for (int i = 0; i < getAudioBuffer().size(); i++) {
+                    float c = map(i, 0, getAudioBuffer().size(), 0, 255);
+                    stroke(c, 255, 255);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
+                    line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
+                }
+                break;
+               
             }
             case 4:
             {
