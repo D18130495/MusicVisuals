@@ -1,12 +1,12 @@
 package ie.tudublin;
 
-import processing.core.PApplet;
+import processing.core.*;
 import ddf.minim.*;
-import ddf.minim.analysis.FFT;
+import ddf.minim.analysis.*;
 
 public abstract class Visual extends PApplet
 {
-	private int frameSize = 512;
+	private int frameSize = 1024;
 	private int sampleRate = 44100;
 
 	private float[] bands;
@@ -21,17 +21,21 @@ public abstract class Visual extends PApplet
 	private float amplitude  = 0;
 	private float smothedAmplitude = 0;
 
-	
-	
+	private PImage image;
+
 	public void startMinim() 
 	{
 		minim = new Minim(this);
-
+		
 		fft = new FFT(frameSize, sampleRate);
-
+		
 		bands = new float[(int) log2(frameSize)];
   		smoothedBands = new float[bands.length];
+	}
 
+	public void backgroundImage() {
+    	image = loadImage("backgroundImg.jpg");
+		background(image);
 	}
 
 	float log2(float f) {
@@ -51,7 +55,6 @@ public abstract class Visual extends PApplet
 		}
 	}
 
-	
 	public void calculateAverageAmplitude()
 	{
 		float total = 0;
@@ -62,7 +65,6 @@ public abstract class Visual extends PApplet
 		amplitude = total / ab.size();
 		smothedAmplitude = PApplet.lerp(smothedAmplitude, amplitude, 0.1f);
 	}
-
 
 	protected void calculateFrequencyBands() {
 		for (int i = 0; i < bands.length; i++) {
@@ -109,6 +111,10 @@ public abstract class Visual extends PApplet
 
 	public float[] getBands() {
 		return bands;
+	}
+
+	public void setBands(float[] bands) {
+		this.bands = bands;
 	}
 
 	public float[] getSmoothedBands() {
