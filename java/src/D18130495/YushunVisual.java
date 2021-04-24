@@ -51,14 +51,15 @@ public class YushunVisual extends Visual {
 
     public void wai(int x, int y, int num, int br, int ro) {
         beginShape();
-        stroke(random(100, 200), 150, 200, 150);
-        strokeWeight(3);
+        stroke(random(100, 220), random(150, 180), 200, 90);
 
         for (int d = 0; d < num; d++) {
         float ping = cos(radians(millis()/10+20*d));
         float r = br + map(ping, -1, 1, -ro, ro);
+        int p = (int)map(abs(getBands()[d]), 0, 1, 3, 3.1f);
+        strokeWeight(p);
         fill(random(100, 200), random(100, 200), 200, 4);
-        vertex(x + cos(radians(d * 360 / num)) * r, y + sin(radians(d * 360 / num)) * r);
+        vertex(x + cos(radians(d * 360 / num)) * r * 1.1f, y + sin(radians(d * 360 / num)) * r * 1.1f);
         }
         endShape(CLOSE);
     }
@@ -89,16 +90,6 @@ public class YushunVisual extends Visual {
                 translate(width/2, height/2);
                 setBands(getFFT().getSpectrumReal());
 
-                float angle=0;
-                float cir=180;
-                
-                for (int i = 0; i < 360; i++) {
-                float dist = getBands()[i];
-                noStroke();
-                fill(random(dist, 200), random(dist, 255), 200);
-                ellipse(0, 0, dist * 2, dist * 2);
-                angle+=PI/20;
-                }
 
                 popMatrix();
 
@@ -168,35 +159,5 @@ public class YushunVisual extends Visual {
                 break;
             }
         }
-
-// for (int i = 0; i < ab.size(); i++) {
-//     float c = map(i, 0, ab.size(), 0, 255);
-//     stroke(c, 255, 255);
-//     //println(lerpedBuffer[i]);
-//     lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-//     line(0, i, lerpedBuffer[i] * halfHeight * 8, i);
-//     line(i, 0, i, lerpedBuffer[i] * halfHeight * 8);
-//     line(width, i, width - (lerpedBuffer[i] * halfHeight * 8), i);
-//     line(i, height, i, height - (lerpedBuffer[i] * halfHeight * 8));
-// }
-                // for (int i = 0; i < ab.size(); i++) {
-                //     sum = sum + abs(ab.get(i));
-                //     average = sum / (float)ab.size();
-                //     float c = map(i, 0, ab.size(), 0, 255);
-                //     stroke(c, 255, 255);
-                //     noFill();
-                //     //println(lerpedBuffer[i]);
-                //     lerpedBuffer[i] = lerp(lerpedBuffer[i], average, 0.1f);
-                //     ellipse(width / 2, height / 2, lerpedBuffer[i] * 2000, lerpedBuffer[i] * 2000);
-                // }
-//            average = sum / (float)ab.size();
-//            lerpedAverage = lerp(lerpedAverage, average, 0.1f);
-//            noStroke();
-//            ellipse(width / 2, 100, lerpedAverage * 500, lerpedAverage * 500);
-
-//            ellipse(200, y, 30, 30);
-//            ellipse(300, lerpedY, 30, 30);
-//            y += random(-10, 10);
-//            lerpedY = lerp(lerpedY, y, 0.1f);
     }
 } 
