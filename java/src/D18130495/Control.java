@@ -4,7 +4,7 @@ import processing.core.*;
 
 public class Control extends PApplet {
 
-    int count;
+    int count = 0;
     int rectLh = 20;
     public int controlNum = 0; //use to display the menu text colour
 
@@ -31,8 +31,8 @@ public class Control extends PApplet {
         textSize(16);
         fill(255, 255, 255);
         text("Start Visual", width / 2, height / 10);
-        text("Start Visual", width / 2, height / 10 * 3);
-        text("Start Visual", width / 2, height / 10 * 5);
+        text("Dance", width / 2, height / 10 * 3);
+        text("Ring line", width / 2, height / 10 * 5);
         text("Start Visual", width / 2, height / 10 * 7);
         text("Start Visual", width / 2, height / 10 * 9);
     }
@@ -41,7 +41,7 @@ public class Control extends PApplet {
 	{
         if(mouseY < map(1, 0, 5, 0, height)) {
             this.visual.keyPressed();
-            if(count == 0) {
+            if(count == 0 && controlNum == 0) {
                 controlNum = 1;
             }
             count++;
@@ -75,11 +75,11 @@ public class Control extends PApplet {
     public void menuColour() {
         if(controlNum == 1) {
             fill(255, 0, 0);
-            text("Start Visual", width / 2, height / 10 * 3);
+            text("Dance", width / 2, height / 10 * 3);
         }
         else if(controlNum == 2) {
             fill(255, 0, 0);
-            text("Start Visual", width / 2, height / 10 * 5);
+            text("Ring line", width / 2, height / 10 * 5);
         }
         else if(controlNum == 3) {
             fill(255, 0, 0);
