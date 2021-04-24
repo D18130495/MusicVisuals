@@ -33,6 +33,7 @@ public class YushunVisual extends Visual {
         startMinim();
         loadAudio("music.mp3");
         lerpedBuffer = new float[width];
+        frameRate(60);
     }
 
     //use to pause the visual
@@ -46,6 +47,20 @@ public class YushunVisual extends Visual {
                 which = 1;
             }
         }
+    }
+
+    public void wai(int x, int y, int num, int br, int ro) {
+        beginShape();
+        stroke(random(100, 200), 150, 200, 150);
+        strokeWeight(3);
+
+        for (int d = 0; d < num; d++) {
+        float ping = cos(radians(millis()/10+20*d));
+        float r = br + map(ping, -1, 1, -ro, ro);
+        fill(random(100, 200), random(100, 200), 200, 4);
+        vertex(x + cos(radians(d * 360 / num)) * r, y + sin(radians(d * 360 / num)) * r);
+        }
+        endShape(CLOSE);
     }
 
     float lerpedAverage = 0;
@@ -69,7 +84,29 @@ public class YushunVisual extends Visual {
             }
             case 1:
             {
-                break;
+                getFFT().forward(getAudioPlayer().mix);
+                pushMatrix();
+                translate(width/2, height/2);
+                setBands(getFFT().getSpectrumReal());
+
+                float angle=0;
+                float cir=180;
+                
+                for (int i = 0; i < 360; i++) {
+                float dist = getBands()[i];
+                noStroke();
+                fill(random(dist, 200), random(dist, 255), 200);
+                ellipse(0, 0, dist * 2, dist * 2);
+                angle+=PI/20;
+                }
+
+                popMatrix();
+
+                for (int d = 120; d <= 540; d +=60) {
+                    int vertexx = (int)map(d, 0, 300, 3, 15);
+                    wai(width/2, height/2, vertexx, d, d/15);
+                }
+            break;
             }
             case 2:
             {
@@ -77,29 +114,32 @@ public class YushunVisual extends Visual {
                 pushMatrix();
                 translate(width/2, height/2);
                 setBands(getFFT().getSpectrumReal());
-                    float angle = 0;
-                    float cir = 180;
-                    
-                    float ang = 0;
-                    int thick = 15;
 
-                    for (int i = 0; i < 360; i++) {
-                    float dist = getBands()[i] / 2;
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getBands()[i], 0.1f);
-                    noStroke();
-                    fill(random(dist, 200), random(dist, 255), 200);
-                    ellipse(sin(angle) * (cir + lerpedBuffer[i]), -cos(angle) * (cir + dist), lerpedBuffer[i] * 5, lerpedBuffer[i] * 5);
-                    angle += PI / 20;
-                    }
-                   
-                    for (int j = 0; j < 360; j++) {
-                    float dist = getBands()[j];
-                    stroke(random(dist, 200), random(dist, 150), 200, 180);
-                    strokeWeight(3);
-                    line(-cos(ang) * (cir + dist + thick), sin(ang) * (cir + dist + thick), -cos(ang) * (cir - dist - thick), sin(ang) * (cir - dist - thick));
-                    ang += PI / 40;
-                    }
+                float angle = 0;
+                float cir = 180;
+                
+                float ang = 0;
+                int thick = 15;
+
+                for (int i = 0; i < 360; i++) {
+                float dist = getBands()[i] / 2;
+                lerpedBuffer[i] = lerp(lerpedBuffer[i], getBands()[i], 0.1f);
+                noStroke();
+                fill(random(dist, 200), random(dist, 255), 200);
+                ellipse(sin(angle) * (cir + lerpedBuffer[i]), -cos(angle) * (cir + dist), abs(lerpedBuffer[i] * 4), abs(lerpedBuffer[i] * 4));
+                angle += PI / 20;
+                }
+                
+                for (int j = 0; j < 360; j++) {
+                float dist = getBands()[j];
+                stroke(random(dist, 200), random(dist, 150), 200, 180);
+                strokeWeight(3);
+                line(-cos(ang) * (cir + dist + thick), sin(ang) * (cir + dist + thick), -cos(ang) * (cir - dist - thick), sin(ang) * (cir - dist - thick));
+                ang += PI / 40;
+                }
+
                 popMatrix();
+
                 break;
             }
             case 3:
