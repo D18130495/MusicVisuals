@@ -31,8 +31,8 @@ public class Control extends PApplet {
         textSize(16);
         fill(255, 255, 255);
         text("Start Visual", width / 2, height / 10);
-        text("Dance", width / 2, height / 10 * 3);
-        text("Ring line", width / 2, height / 10 * 5);
+        text("Two-channel dance", width / 2, height / 10 * 3);
+        text("Rain", width / 2, height / 10 * 5);
         text("Start Visual", width / 2, height / 10 * 7);
         text("Start Visual", width / 2, height / 10 * 9);
     }
@@ -75,11 +75,11 @@ public class Control extends PApplet {
     public void menuColour() {
         if(controlNum == 1) {
             fill(255, 0, 0);
-            text("Dance", width / 2, height / 10 * 3);
+            text("Two-channel dance", width / 2, height / 10 * 3);
         }
         else if(controlNum == 2) {
             fill(255, 0, 0);
-            text("Ring line", width / 2, height / 10 * 5);
+            text("Rain", width / 2, height / 10 * 5);
         }
         else if(controlNum == 3) {
             fill(255, 0, 0);
