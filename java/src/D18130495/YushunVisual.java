@@ -31,7 +31,7 @@ public class YushunVisual extends Visual {
     public void setup() {
         colorMode(RGB);
         startMinim();
-        loadAudio("music.mp3");
+        loadAudio("music1.mp3");
         lerpedBuffer = new float[width];
         frameRate(60);
     }
@@ -49,20 +49,32 @@ public class YushunVisual extends Visual {
         }
     }
 
-    public void wai(int x, int y, int num, int br, int ro) {
+    public void dance1(int x, int y, int num, int br, int ro) {
         beginShape();
-        stroke(random(100, 220), random(150, 180), 200, 90);
+        stroke(random(100, 220), random(100, 180), 200, 110);
 
         for (int d = 0; d < num; d++) {
-        float ping = cos(radians(millis()/10+20*d));
-        float r = br + map(ping, -1, 1, -ro, ro);
-        int p = (int)map(abs(getBands()[d]), 0, 1, 3, 3.1f);
-        strokeWeight(p);
-        fill(random(100, 200), random(100, 200), 200, 4);
-        vertex(x + cos(radians(d * 360 / num)) * r * 1.1f, y + sin(radians(d * 360 / num)) * r * 1.1f);
+            float ping = cos(radians(millis()/10 + 20 * d));
+            float r = br + map(ping, -1, 1, -ro, ro);
+            int p = (int)map(abs(getBands()[d]), 0, 1, 3, 3.1f);
+            strokeWeight(p);
+            fill(random(100, 200), random(100, 200), 200, 4);
+            vertex(x + cos(radians(d * 360 / num)) * r * 1.1f, y + sin(radians(d * 360 / num)) * r * 1.1f);
         }
         endShape(CLOSE);
     }
+
+    // public void dance2(int x, int y,int num, int br, int ro){
+    //     beginShape();
+    //     for (int i = 0; i < num; i++){
+    //         float ping = sin(radians(millis() / 6 + 20 * i));
+    //         float r = br + map(ping, -1, 1, -ro, ro);
+    //         int p = (int)map(abs(getBands()[i]), 0, 1, 3, 3.1f);
+    //         strokeWeight(p);
+    //         vertex(x + cos(radians(i * 360 / num)) * r / 3, y + sin(radians(i * 360 / num)) * r / 3);
+    //     }
+    //     endShape(CLOSE);
+    //   }
 
     float lerpedAverage = 0;
 
@@ -85,19 +97,36 @@ public class YushunVisual extends Visual {
             }
             case 1:
             {
+                translate(width/2, height/2);
                 getFFT().forward(getAudioPlayer().mix);
                 pushMatrix();
-                translate(width/2, height/2);
                 setBands(getFFT().getSpectrumReal());
+                for (int d = 120; d <= 540; d += 60) {
+                    int vertex1 = (int)map(d, 0, 300, 3, 15);
+                    dance1(0, 0, vertex1, d, d / 15);
+                }
 
+                int size = 150;
+                int range = 130;
+                
+                for (int i = 0; i < getAudioPlayer().left.size(); i+=4){
+                    stroke(color(255 - sin(map(i,0, getAudioPlayer().left.size(),0, 1) * PI) * 255, 0, sin(map(i,0, getAudioPlayer().left.size(),0, 1) * PI) * 255));
+                    float r = map(i, 0, getAudioPlayer().left.size(), 0, 2 * PI);
+                    float s = abs(getAudioPlayer().left.get(i))*range;
+                    line(sin(r) * (size), cos(r) * (size), sin(r) * (s + size), cos(r) * (s + size));
+                }
 
+                size = 300;
+
+                for (int i=0;i<getAudioPlayer().right.size();i+=4){
+                    stroke(color(255 - sin(map(i,0, getAudioPlayer().right.size(),0, 1) * PI) * 255, 0, sin(map(i,0, getAudioPlayer().right.size(),0, 1) * PI) * 255));
+                    float r = map(i, 0, getAudioPlayer().right.size(), 0, 2 * PI);
+                    float s = abs(getAudioPlayer().right.get(i))*range;
+                    line(sin(r) * (size), cos(r) * (size), sin(r) * (s + size), cos(r) * (s + size));
+                  }
                 popMatrix();
 
-                for (int d = 120; d <= 540; d +=60) {
-                    int vertexx = (int)map(d, 0, 300, 3, 15);
-                    wai(width/2, height/2, vertexx, d, d/15);
-                }
-            break;
+                break;
             }
             case 2:
             {
@@ -128,6 +157,17 @@ public class YushunVisual extends Visual {
                 line(-cos(ang) * (cir + dist + thick), sin(ang) * (cir + dist + thick), -cos(ang) * (cir - dist - thick), sin(ang) * (cir - dist - thick));
                 ang += PI / 40;
                 }
+                
+                
+
+                // strokeWeight(2);
+                // stroke(255,113,113);
+                // fill(255,113,113,64);
+                // translate(0, 0);
+                // for (int i = 0; i < 299; i += 45){
+                //     int vertex2 = (int)map(i, 0, 299, 40, 100);
+                //     dance2(0, 0, vertex2, i, i / 10);
+                // }
 
                 popMatrix();
 
