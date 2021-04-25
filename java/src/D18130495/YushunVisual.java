@@ -180,18 +180,22 @@ public class YushunVisual extends Visual {
             }
             case 3:
             {
+                getFFT().forward(getAudioPlayer().mix);
+                pushMatrix();
+                setBands(getFFT().getSpectrumReal());
+
                 for(int i = 0; i < 1; i++) {
-                    Circle c1 = new Circle(width / 2, 0, (int)random(5, 15));
-                    circle1.add(c1);
-                    Circle c2 = new Circle(width / 2, height, (int)random(5, 15));
-                    circle2.add(c2);
-                    Circle c3 = new Circle(0, height / 2, (int)random(5, 15));
-                    circle3.add(c3);
-                    Circle c4 = new Circle(width, height / 2, (int)random(5, 15));
-                    circle4.add(c4);
-                    // noStroke();
-                    // fill(113, 99, 174);
-                    // ellipse(c.getX(), c.getY(), c.getRadius(), c.getRadius());
+                    if(getBands()[i] != 0) {
+                        Circle c1 = new Circle(width / 2, 0, (int)random(getBands()[i], getBands()[i] * 2));
+                        circle1.add(c1);
+                        Circle c2 = new Circle(width / 2, height, (int)random(getBands()[i],  getBands()[i] * 2));
+                        circle2.add(c2);
+                        Circle c3 = new Circle(0, height / 2, (int)random(getBands()[i],  getBands()[i] * 2));
+                        circle3.add(c3);
+                        Circle c4 = new Circle(width, height / 2, (int)random(getBands()[i],  getBands()[i] * 2));
+                        circle4.add(c4);
+                    }
+                   
                     for(int j = 0; j < circle1.size(); j++) {
                         noStroke();
                         fill(113, 99, 174);
@@ -205,6 +209,9 @@ public class YushunVisual extends Visual {
                         ellipse(circle4.get(j).getX(), circle4.get(j).getY(), circle4.get(j).getRadius(), circle4.get(j).getRadius());
                     }
                 }
+
+                popMatrix();
+                
                 break;
             }
             case 4:
