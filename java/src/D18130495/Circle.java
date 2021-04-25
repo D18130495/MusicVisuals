@@ -12,29 +12,29 @@ public class Circle {
     }
 
     public void update1() {
-        int min = -30;
-        int max = 30;
+        int min = -20;
+        int max = 20;
         x = x + min + (int)(Math.random() * (max - min +1));
         y = y + 10;
     }
 
     public void update2() {
-        int min = -30;
-        int max = 30;
+        int min = -20;
+        int max = 20;
         x = x + min + (int)(Math.random() * (max - min +1));
         y = y - 10;
     }
 
     public void update3() {
-        int min = -30;
-        int max = 30;
+        int min = -20;
+        int max = 20;
         x = x + 10;
         y = y + min + (int)(Math.random() * (max - min +1));
     }
 
     public void update4() {
-        int min = -30;
-        int max = 30;
+        int min = -20;
+        int max = 20;
         x = x - 10;
         y = y + min + (int)(Math.random() * (max - min +1));
     }
