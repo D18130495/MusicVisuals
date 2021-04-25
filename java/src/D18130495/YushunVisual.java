@@ -15,6 +15,7 @@ public class YushunVisual extends Visual {
     ArrayList<Circle> circle2 = new ArrayList<Circle>();
     ArrayList<Circle> circle3 = new ArrayList<Circle>();
     ArrayList<Circle> circle4 = new ArrayList<Circle>();
+    ArrayList<Start2021> start2021 = new ArrayList<Start2021>();
     float[] lerpedBuffer;
 
     public void settings() {
@@ -101,7 +102,7 @@ public class YushunVisual extends Visual {
                     dance1(0, 0, vertex1, d, d / 15);
                 }
                 
-                //Two-channel dance, inner use left channel, outer use right channel
+                //Two-channel dance, inner use left channel, outer use right channel, this shape is for left channel
                 int size = 150;
                 int range = 130;
                 
@@ -115,6 +116,7 @@ public class YushunVisual extends Visual {
 
                 size = 300;
 
+                //This shape is for right channel 
                 for (int i=0;i<getAudioPlayer().right.size();i+=4){
                     stroke(color(255 - sin(map(i,0, getAudioPlayer().right.size(),0, 1) * PI) * 255, 0, sin(map(i,0, getAudioPlayer().right.size(),0, 1) * PI) * 255));
                     float r = map(i, 0, getAudioPlayer().right.size(), 0, 2 * PI);
@@ -185,6 +187,7 @@ public class YushunVisual extends Visual {
                 pushMatrix();
                 setBands(getFFT().getSpectrumReal());
 
+                //create circle from four different direction
                 for(int i = 0; i < 1; i++) {
                     if(getBands()[i] != 0) {
                         Circle c1 = new Circle(width / 2, 0, (int)random(getBands()[i], getBands()[i] * 1.2f));
@@ -197,6 +200,7 @@ public class YushunVisual extends Visual {
                         circle4.add(c4);
                     }
                    
+                    //update circles X and Y, make it move
                     for(int j = 0; j < circle1.size(); j++) {
                         noStroke();
                         fill(113, random(getBands()[1], 200), 174);
@@ -217,16 +221,29 @@ public class YushunVisual extends Visual {
             }
             case 4:
             {
-                for (int i = 0; i < getAudioBuffer().size() - 1; i++) {
+                noFill();
 
-                    stroke(i / 5, 255, 255);
-                
-                    strokeWeight(abs(getAudioPlayer().left.get(i)*20));
-                
-                    line(i, 200+getAudioPlayer().left.get(i)*50, i+1, 200+getAudioPlayer().left.get(i+1)*50);
-                
-                    line(i, 400+getAudioPlayer().right.get(i)*50, i+1, 400+getAudioPlayer().right.get(i+1)*50);
-                  }
+                for(int i = 0; i < 20; i++) {
+                    Start2021 s = new Start2021((int)random(0, width), (int)random(0, height));
+                    start2021.add(s);
+                }
+
+                for(int j = 0; j < start2021.size(); j++) {
+                    if(start2021.get(j).isUpdateing()) {
+                        for(int x = 0; x < start2021.size(); x++) {
+                            if(start2021.get(j) != start2021.get(x)) {
+                                float d = dist(start2021.get(j).getX(), start2021.get(j).getY(), start2021.get(x).getX(), start2021.get(x).getY());
+                                if(d - 4 < start2021.get(j).getRadius() + start2021.get(x).getRadius()) {
+                                    start2021.get(j).setUpdateing(false);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    start2021.get(j).update();
+                    ellipse(start2021.get(j).getX(), start2021.get(j).getY(), start2021.get(j).getRadius() * 2, start2021.get(j).getRadius() * 2);
+                }
+
                 break;
             }
         }
