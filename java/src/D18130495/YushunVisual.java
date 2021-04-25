@@ -39,6 +39,7 @@ public class YushunVisual extends Visual {
         loadAudio("music1.mp3");
         lerpedBuffer = new float[width];
         frameRate(60);
+        smooth();
     }
 
     //use to pause the visual
@@ -186,19 +187,19 @@ public class YushunVisual extends Visual {
 
                 for(int i = 0; i < 1; i++) {
                     if(getBands()[i] != 0) {
-                        Circle c1 = new Circle(width / 2, 0, (int)random(getBands()[i], getBands()[i] * 2));
+                        Circle c1 = new Circle(width / 2, 0, (int)random(getBands()[i], getBands()[i] * 1.2f));
                         circle1.add(c1);
-                        Circle c2 = new Circle(width / 2, height, (int)random(getBands()[i],  getBands()[i] * 2));
+                        Circle c2 = new Circle(width / 2, height, (int)random(getBands()[i], getBands()[i] * 1.2f));
                         circle2.add(c2);
-                        Circle c3 = new Circle(0, height / 2, (int)random(getBands()[i],  getBands()[i] * 2));
+                        Circle c3 = new Circle(0, height / 2, (int)random(getBands()[i], getBands()[i] * 1.2f));
                         circle3.add(c3);
-                        Circle c4 = new Circle(width, height / 2, (int)random(getBands()[i],  getBands()[i] * 2));
+                        Circle c4 = new Circle(width, height / 2, (int)random(getBands()[i], getBands()[i] * 1.2f));
                         circle4.add(c4);
                     }
                    
                     for(int j = 0; j < circle1.size(); j++) {
                         noStroke();
-                        fill(113, 99, 174);
+                        fill(113, random(getBands()[1], 200), 174);
                         circle1.get(j).update1();
                         ellipse(circle1.get(j).getX(), circle1.get(j).getY(), circle1.get(j).getRadius(), circle1.get(j).getRadius());
                         circle2.get(j).update2();
