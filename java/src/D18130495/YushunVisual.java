@@ -51,9 +51,8 @@ public class YushunVisual extends Visual {
 
     public void dance1(int x, int y, int num, int br, int ro) {
         beginShape();
-        stroke(random(100, 220), random(100, 180), 200, 110);
-
         for (int d = 0; d < num; d++) {
+            stroke(100, 150, 220, 110);
             float ping = cos(radians(millis()/10 + 20 * d));
             float r = br + map(ping, -1, 1, -ro, ro);
             int p = (int)map(abs(getBands()[d]), 0, 1, 3, 3.1f);
@@ -63,18 +62,6 @@ public class YushunVisual extends Visual {
         }
         endShape(CLOSE);
     }
-
-    // public void dance2(int x, int y,int num, int br, int ro){
-    //     beginShape();
-    //     for (int i = 0; i < num; i++){
-    //         float ping = sin(radians(millis() / 6 + 20 * i));
-    //         float r = br + map(ping, -1, 1, -ro, ro);
-    //         int p = (int)map(abs(getBands()[i]), 0, 1, 3, 3.1f);
-    //         strokeWeight(p);
-    //         vertex(x + cos(radians(i * 360 / num)) * r / 3, y + sin(radians(i * 360 / num)) * r / 3);
-    //     }
-    //     endShape(CLOSE);
-    //   }
 
     float lerpedAverage = 0;
 
@@ -97,6 +84,7 @@ public class YushunVisual extends Visual {
             }
             case 1:
             {
+                //Draw the background
                 translate(width/2, height/2);
                 getFFT().forward(getAudioPlayer().mix);
                 pushMatrix();
@@ -105,7 +93,8 @@ public class YushunVisual extends Visual {
                     int vertex1 = (int)map(d, 0, 300, 3, 15);
                     dance1(0, 0, vertex1, d, d / 15);
                 }
-
+                
+                //Two-channel dance, inner use left channel, outer use right channel
                 int size = 150;
                 int range = 130;
                 
@@ -135,21 +124,23 @@ public class YushunVisual extends Visual {
                 translate(width/2, height/2);
                 setBands(getFFT().getSpectrumReal());
 
+                //Circle
                 float angle = 0;
                 float cir = 180;
-                
-                float ang = 0;
-                int thick = 15;
 
                 for (int i = 0; i < 360; i++) {
                 float dist = getBands()[i] / 2;
-                lerpedBuffer[i] = lerp(lerpedBuffer[i], getBands()[i], 0.1f);
+                lerpedBuffer[i] = lerp(lerpedBuffer[i], getBands()[i], 0.08f);
                 noStroke();
                 fill(random(dist, 200), random(dist, 255), 200);
                 ellipse(sin(angle) * (cir + lerpedBuffer[i]), -cos(angle) * (cir + dist), abs(lerpedBuffer[i] * 4), abs(lerpedBuffer[i] * 4));
                 angle += PI / 20;
                 }
-                
+
+                //Ring
+                float ang = 0;
+                int thick = 15;
+
                 for (int j = 0; j < 360; j++) {
                 float dist = getBands()[j];
                 stroke(random(dist, 200), random(dist, 150), 200, 180);
@@ -157,17 +148,15 @@ public class YushunVisual extends Visual {
                 line(-cos(ang) * (cir + dist + thick), sin(ang) * (cir + dist + thick), -cos(ang) * (cir - dist - thick), sin(ang) * (cir - dist - thick));
                 ang += PI / 40;
                 }
-                
-                
 
-                // strokeWeight(2);
-                // stroke(255,113,113);
-                // fill(255,113,113,64);
-                // translate(0, 0);
-                // for (int i = 0; i < 299; i += 45){
-                //     int vertex2 = (int)map(i, 0, 299, 40, 100);
-                //     dance2(0, 0, vertex2, i, i / 10);
-                // }
+                //Ring
+                for (int x = 0; x < 60; x += 5) {
+                float dist = getBands()[x];
+                float position = random(0, width);
+                stroke(random(dist, 200), random(dist, 150), 200, 180);
+                strokeWeight(3);
+                line(position - width / 2, -(height / 2), position - width / 2, x + 20 - height / 2);
+                }
 
                 popMatrix();
 
