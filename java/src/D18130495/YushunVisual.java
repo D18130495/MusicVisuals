@@ -6,10 +6,15 @@ import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import processing.core.PApplet;
 import ddf.minim.analysis.*;
+import java.util.ArrayList;
 import ie.tudublin.Visual;
 
 public class YushunVisual extends Visual {
 
+    ArrayList<Circle> circle1 = new ArrayList<Circle>();
+    ArrayList<Circle> circle2 = new ArrayList<Circle>();
+    ArrayList<Circle> circle3 = new ArrayList<Circle>();
+    ArrayList<Circle> circle4 = new ArrayList<Circle>();
     float[] lerpedBuffer;
 
     public void settings() {
@@ -31,7 +36,7 @@ public class YushunVisual extends Visual {
     public void setup() {
         colorMode(RGB);
         startMinim();
-        loadAudio("music1.mp3");
+        loadAudio("music.mp3");
         lerpedBuffer = new float[width];
         frameRate(60);
     }
@@ -153,7 +158,7 @@ public class YushunVisual extends Visual {
                 for (int x = 0; x < 60; x += 5) {
                 float dist = getBands()[x];
                 float position = random(0, width);
-                stroke(random(dist, 200), random(dist, 150), 200, 180);
+                stroke(random(dist, 200), random(dist, 150), 200);
                 strokeWeight(3);
                 line(position - width / 2, -(height / 2), position - width / 2, x + 20 - height / 2);
                 }
@@ -164,12 +169,30 @@ public class YushunVisual extends Visual {
             }
             case 3:
             {
-                for (int i = 0; i < getAudioBuffer().size(); i++) {
-                    strokeWeight(1);
-                    float c = map(i, 0, getAudioBuffer().size(), 0, 255);
-                    stroke(c, 255, 255);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
-                    line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
+                for(int i = 0; i < 1; i++) {
+                    Circle c1 = new Circle(width / 2, 0, (int)random(5, 15));
+                    circle1.add(c1);
+                    Circle c2 = new Circle(width / 2, height, (int)random(5, 15));
+                    circle2.add(c2);
+                    Circle c3 = new Circle(0, height / 2, (int)random(5, 15));
+                    circle3.add(c3);
+                    Circle c4 = new Circle(width, height / 2, (int)random(5, 15));
+                    circle4.add(c4);
+                    // noStroke();
+                    // fill(113, 99, 174);
+                    // ellipse(c.getX(), c.getY(), c.getRadius(), c.getRadius());
+                    for(int j = 0; j < circle1.size(); j++) {
+                        noStroke();
+                        fill(113, 99, 174);
+                        circle1.get(j).update1();
+                        ellipse(circle1.get(j).getX(), circle1.get(j).getY(), circle1.get(j).getRadius(), circle1.get(j).getRadius());
+                        circle2.get(j).update2();
+                        ellipse(circle2.get(j).getX(), circle2.get(j).getY(), circle2.get(j).getRadius(), circle2.get(j).getRadius());
+                        circle3.get(j).update3();
+                        ellipse(circle3.get(j).getX(), circle3.get(j).getY(), circle3.get(j).getRadius(), circle3.get(j).getRadius());
+                        circle4.get(j).update4();
+                        ellipse(circle4.get(j).getX(), circle4.get(j).getY(), circle4.get(j).getRadius(), circle4.get(j).getRadius());
+                    }
                 }
                 break;
             }
