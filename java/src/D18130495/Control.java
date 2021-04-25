@@ -33,7 +33,7 @@ public class Control extends PApplet {
         text("Start Visual", width / 2, height / 10);
         text("Two-channel dance", width / 2, height / 10 * 3);
         text("Rain", width / 2, height / 10 * 5);
-        text("Start Visual", width / 2, height / 10 * 7);
+        text("Pop-out", width / 2, height / 10 * 7);
         text("Start Visual", width / 2, height / 10 * 9);
     }
 
@@ -83,7 +83,7 @@ public class Control extends PApplet {
         }
         else if(controlNum == 3) {
             fill(255, 0, 0);
-            text("Start Visual", width / 2, height / 10 * 7);
+            text("Pop-out", width / 2, height / 10 * 7);
         }
         else if(controlNum == 4) {
             fill(255, 0, 0);
