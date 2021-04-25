@@ -134,12 +134,12 @@ public class YushunVisual extends Visual {
                 float cir = 180;
 
                 for (int i = 0; i < 360; i++) {
-                float dist = getBands()[i] / 2;
-                lerpedBuffer[i] = lerp(lerpedBuffer[i], getBands()[i], 0.08f);
-                noStroke();
-                fill(random(dist, 200), random(dist, 255), 200);
-                ellipse(sin(angle) * (cir + lerpedBuffer[i]), -cos(angle) * (cir + dist), abs(lerpedBuffer[i] * 4), abs(lerpedBuffer[i] * 4));
-                angle += PI / 20;
+                    float dist = getBands()[i] / 2;
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getBands()[i], 0.08f);
+                    noStroke();
+                    fill(random(dist, 200), random(dist, 255), 200);
+                    ellipse(sin(angle) * (cir + lerpedBuffer[i]), -cos(angle) * (cir + dist), abs(lerpedBuffer[i] * 4), abs(lerpedBuffer[i] * 4));
+                    angle += PI / 20;
                 }
 
                 //Ring
@@ -147,20 +147,29 @@ public class YushunVisual extends Visual {
                 int thick = 15;
 
                 for (int j = 0; j < 360; j++) {
-                float dist = getBands()[j];
-                stroke(random(dist, 200), random(dist, 150), 200, 180);
-                strokeWeight(3);
-                line(-cos(ang) * (cir + dist + thick), sin(ang) * (cir + dist + thick), -cos(ang) * (cir - dist - thick), sin(ang) * (cir - dist - thick));
-                ang += PI / 40;
+                    float dist = getBands()[j];
+                    stroke(random(dist, 200), random(dist, 150), 200, 180);
+                    strokeWeight(3);
+                    line(-cos(ang) * (cir + dist + thick), sin(ang) * (cir + dist + thick), -cos(ang) * (cir - dist - thick), sin(ang) * (cir - dist - thick));
+                    ang += PI / 40;
                 }
 
-                //Ring
+                //top line
                 for (int x = 0; x < 60; x += 5) {
-                float dist = getBands()[x];
-                float position = random(0, width);
-                stroke(random(dist, 200), random(dist, 150), 200);
-                strokeWeight(3);
-                line(position - width / 2, -(height / 2), position - width / 2, x + 20 - height / 2);
+                    float dist = getBands()[x];
+                    float position = random(0, width);
+                    stroke(random(dist, 200), random(dist, 150), 200);
+                    strokeWeight(3);
+                    line(position - width / 2, -(height / 2), position - width / 2, x + 20 - height / 2);
+                }
+
+                //bottom line
+                for (int x = 0; x < 60; x += 5) {
+                    float dist = getBands()[x];
+                    float position = random(0, width);
+                    stroke(random(dist, 200), random(dist, 150), 200);
+                    strokeWeight(3);
+                    line(position - width / 2, height / 2, position - width / 2, -x - 20 + height / 2);
                 }
 
                 popMatrix();
