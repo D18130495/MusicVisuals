@@ -5,23 +5,18 @@ import D18130495.Control;
 
 public class Main
 {	
-
-	public void startUI()
-	{
-		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new YushunVisual());		
-	}
+	Control control = new Control();
 
 	public void control()
 	{
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new Control());		
+        processing.core.PApplet.runSketch( a, control);		
 	}
 
 	public static void main(String[] args)
 	{
 		Main main = new Main();
-		main.startUI();
-		main.control();			
+		main.control();
+		main.control.startUI();
 	}
 }

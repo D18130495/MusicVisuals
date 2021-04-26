@@ -35,7 +35,7 @@ public abstract class Visual extends PApplet
 
 	public void backgroundImage() {
     	image = loadImage("backgroundImg.jpg");
-		background(image);
+		background(0);
 	}
 
 	float log2(float f) {

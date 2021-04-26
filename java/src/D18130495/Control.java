@@ -34,7 +34,7 @@ public class Control extends PApplet {
         text("Two-channel dance", width / 2, height / 10 * 3);
         text("Rain", width / 2, height / 10 * 5);
         text("Pop-out", width / 2, height / 10 * 7);
-        text("Start 2021", width / 2, height / 10 * 9);
+        text("Draw", width / 2, height / 10 * 9);
     }
 
     public void mousePressed()
@@ -80,7 +80,7 @@ public class Control extends PApplet {
         }
         else if(controlNum == 4) {
             fill(255, 0, 0);
-            text("Start 2021", width / 2, height / 10 * 9);
+            text("Draw", width / 2, height / 10 * 9);
         }
     }
 

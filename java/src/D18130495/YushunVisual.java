@@ -17,7 +17,7 @@ public class YushunVisual extends Visual {
     ArrayList<Circle> circle3 = new ArrayList<Circle>();
     ArrayList<Circle> circle4 = new ArrayList<Circle>();
     ArrayList<Start2021> start2021 = new ArrayList<Start2021>();
-    ArrayList<PVector> spots = new ArrayList<PVector>();
+    ArrayList<PVector> pixel = new ArrayList<PVector>();
     float[] lerpedBuffer;
 
     public void settings() {
@@ -78,19 +78,23 @@ public class YushunVisual extends Visual {
         endShape(CLOSE);
     }
 
-    public void newCircle() {
-        for(int x = 0; x < width; x++)
-        {
-            for(int y = 0; y < height; y++)
-            {
-                spots.add(new PVector(x, y));
-            }
-        }
-        PVector spot = spots.get((int)random(spots.size()));
-        int x = (int)spot.x;
-        int y = (int)spot.y;
-        start2021.add(new Start2021(x, y));
-    }
+    // public void newCircle() {
+    //     for(int x = 0; x < width; x++)
+    //     {
+    //         for(int y = 0; y < height; y++)
+    //         {
+    //             spots.add(new PVector(x, y));
+    //         }
+    //     }
+    //     PVector spot = spots.get((int)random(spots.size()));
+    //     int x = (int)spot.x;
+    //     int y = (int)spot.y;
+    //     start2021.add(new Start2021(x, y));
+    // }
+
+    public void newRect() {
+        
+    }    
 
     float lerpedAverage = 0;
 
@@ -247,17 +251,28 @@ public class YushunVisual extends Visual {
                 background(0);
                 noFill();
 
-                newCircle();
+                //newRect();
                 for(int j = 0; j < start2021.size(); j++) {
-                    
-                    if(abs(getBands()[j] * 10) >= 30) {
-                        start2021.get(j).update();
-                    }
-                    ellipse(start2021.get(j).getX(), start2021.get(j).getY(), start2021.get(j).getRadius(), start2021.get(j).getRadius());
-                    if(start2021.get(j).getRadius() >= 50) {
-                        start2021.remove(j);
-                    }
+                    rect(start2021.get(j).getX(), start2021.get(j).getY(), start2021.get(j).getRadius(), start2021.get(j).getRadius());
                 }
+
+
+
+
+
+
+
+                //newCircle();
+                // for(int j = 0; j < start2021.size(); j++) {
+                    
+                //     if(abs(getBands()[j] * 10) >= 30) {
+                //         start2021.get(j).update();
+                //     }
+                //     ellipse(start2021.get(j).getX(), start2021.get(j).getY(), start2021.get(j).getRadius(), start2021.get(j).getRadius());
+                //     if(start2021.get(j).getRadius() >= 50) {
+                //         start2021.remove(j);
+                //     }
+                // }
                 break;
             }
         }
