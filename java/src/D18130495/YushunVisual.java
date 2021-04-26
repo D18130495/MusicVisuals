@@ -9,6 +9,7 @@ import processing.core.PApplet;
 import ddf.minim.analysis.*;
 import java.util.ArrayList;
 import ie.tudublin.Visual;
+import processing.core.*;
 
 public class YushunVisual extends Visual {
 
@@ -16,9 +17,12 @@ public class YushunVisual extends Visual {
     ArrayList<Circle> circle2 = new ArrayList<Circle>();
     ArrayList<Circle> circle3 = new ArrayList<Circle>();
     ArrayList<Circle> circle4 = new ArrayList<Circle>();
-    ArrayList<Start2021> start2021 = new ArrayList<Start2021>();
-    ArrayList<PVector> pixel = new ArrayList<PVector>();
+    ArrayList<Rect> rect = new ArrayList<Rect>();
+    ArrayList<Rect> rect2 = new ArrayList<Rect>();
+    //ArrayList<PVector> pixel = new ArrayList<PVector>();
     float[] lerpedBuffer;
+
+    private PImage image;
 
     public void settings() {
         size(1024, 640);
@@ -43,10 +47,20 @@ public class YushunVisual extends Visual {
         lerpedBuffer = new float[width];
         frameRate(60);
         smooth();
-        //the is use for the case4 visual, generate circles
-        for(int i = 0; i < 10; i++) {
-            Start2021 s = new Start2021((int)random(0, width), (int)random(0, height));
-            start2021.add(s);
+
+        image = loadImage("backgroundImg.png");
+        for(int x = 0; x < width; x++)
+        {
+            for(int y = 0; y < height; y++)
+            {
+                int index = x + y * image.width;
+                float  b = brightness(image.pixels[index]);
+                // if(b > 1)
+                    rect.add(new Rect(x, y));
+
+
+                //pixel.add(new PVector(x, y));
+            }
         }
     }
 
@@ -92,8 +106,13 @@ public class YushunVisual extends Visual {
     //     start2021.add(new Start2021(x, y));
     // }
 
+    
+
     public void newRect() {
-        
+        Rect r = rect.get((int)random(0, rect.size()));
+        int x = (int)r.getX();
+        int y = (int)r.getY();
+        rect2.add(new Rect(x, y));
     }    
 
     float lerpedAverage = 0;
@@ -249,14 +268,17 @@ public class YushunVisual extends Visual {
                 getFFT().forward(getAudioPlayer().mix);
                 setBands(getFFT().getSpectrumReal());
                 background(0);
-                noFill();
 
-                //newRect();
-                for(int j = 0; j < start2021.size(); j++) {
-                    rect(start2021.get(j).getX(), start2021.get(j).getY(), start2021.get(j).getRadius(), start2021.get(j).getRadius());
+                newRect();
+                
+                // for(int j = 0; j < pixel.size(); j++) {
+                //     rect(pixel.get(j).x, pixel.get(j).y, 1, 1);
+                // }
+                for(int j = 0; j < rect2.size(); j++) {
+                    
+                    fill(150);
+                    rect(rect2.get(j).getX(), rect2.get(j).getY(), 1, 1);
                 }
-
-
 
 
 
