@@ -4,6 +4,7 @@ import ddf.minim.*;
 import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
+import processing.core.PVector;
 import processing.core.PApplet;
 import ddf.minim.analysis.*;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class YushunVisual extends Visual {
     ArrayList<Circle> circle3 = new ArrayList<Circle>();
     ArrayList<Circle> circle4 = new ArrayList<Circle>();
     ArrayList<Start2021> start2021 = new ArrayList<Start2021>();
+    ArrayList<PVector> spots = new ArrayList<PVector>();
     float[] lerpedBuffer;
 
     public void settings() {
@@ -41,6 +43,11 @@ public class YushunVisual extends Visual {
         lerpedBuffer = new float[width];
         frameRate(60);
         smooth();
+        //the is use for the case4 visual, generate circles
+        for(int i = 0; i < 10; i++) {
+            Start2021 s = new Start2021((int)random(0, width), (int)random(0, height));
+            start2021.add(s);
+        }
     }
 
     //use to pause the visual
@@ -57,7 +64,7 @@ public class YushunVisual extends Visual {
     }
 
     //Background for first visual
-    public void dance1(int x, int y, int num, int br, int ro) {
+    public void dance(int x, int y, int num, int br, int ro) {
         beginShape();
         for (int d = 0; d < num; d++) {
             stroke(100, 150, 220, 110);
@@ -71,10 +78,24 @@ public class YushunVisual extends Visual {
         endShape(CLOSE);
     }
 
+    public void newCircle() {
+        for(int x = 0; x < width; x++)
+        {
+            for(int y = 0; y < height; y++)
+            {
+                spots.add(new PVector(x, y));
+            }
+        }
+        PVector spot = spots.get((int)random(spots.size()));
+        int x = (int)spot.x;
+        int y = (int)spot.y;
+        start2021.add(new Start2021(x, y));
+    }
+
     float lerpedAverage = 0;
 
     public void draw() {
-        backgroundImage();
+        background(0);
         stroke(255);
         float halfHeight = height / 2;
         float average = 0;
@@ -99,7 +120,7 @@ public class YushunVisual extends Visual {
                 setBands(getFFT().getSpectrumReal());
                 for (int d = 120; d <= 540; d += 60) {
                     int vertex1 = (int)map(d, 0, 300, 3, 15);
-                    dance1(0, 0, vertex1, d, d / 15);
+                    dance(0, 0, vertex1, d, d / 15);
                 }
                 
                 //Two-channel dance, inner use left channel, outer use right channel, this shape is for left channel
@@ -221,29 +242,22 @@ public class YushunVisual extends Visual {
             }
             case 4:
             {
+                getFFT().forward(getAudioPlayer().mix);
+                setBands(getFFT().getSpectrumReal());
+                background(0);
                 noFill();
 
-                for(int i = 0; i < 20; i++) {
-                    Start2021 s = new Start2021((int)random(0, width), (int)random(0, height));
-                    start2021.add(s);
-                }
-
+                newCircle();
                 for(int j = 0; j < start2021.size(); j++) {
-                    if(start2021.get(j).isUpdateing()) {
-                        for(int x = 0; x < start2021.size(); x++) {
-                            if(start2021.get(j) != start2021.get(x)) {
-                                float d = dist(start2021.get(j).getX(), start2021.get(j).getY(), start2021.get(x).getX(), start2021.get(x).getY());
-                                if(d - 4 < start2021.get(j).getRadius() + start2021.get(x).getRadius()) {
-                                    start2021.get(j).setUpdateing(false);
-                                    break;
-                                }
-                            }
-                        }
+                    
+                    if(abs(getBands()[j] * 10) >= 30) {
+                        start2021.get(j).update();
                     }
-                    start2021.get(j).update();
-                    ellipse(start2021.get(j).getX(), start2021.get(j).getY(), start2021.get(j).getRadius() * 2, start2021.get(j).getRadius() * 2);
+                    ellipse(start2021.get(j).getX(), start2021.get(j).getY(), start2021.get(j).getRadius(), start2021.get(j).getRadius());
+                    if(start2021.get(j).getRadius() >= 50) {
+                        start2021.remove(j);
+                    }
                 }
-
                 break;
             }
         }
