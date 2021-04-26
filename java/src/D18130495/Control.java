@@ -64,13 +64,6 @@ public class Control extends PApplet {
         }	
 	}
 
-    public void mouseDragged() 
-    {
-        if(mouseY <= 333 && mouseY >= 308)
-            if(mouseX <= (rectLh + 20) && mouseX >= (rectLh - 20))
-                rectLh = mouseX + 1;
-    } 
-
     //use to indicate which options have been chosen
     public void menuColour() {
         if(controlNum == 1) {
@@ -91,17 +84,10 @@ public class Control extends PApplet {
         }
     }
 
-    public void controlBar() {
-        noStroke();
-        fill(255, 255, 255);
-        rect(0, 308, rectLh, 25, 0, 7, 7, 0);
-    }
-
     public void draw() {
         background(0); //black background
         drawGrid();
         menuColour();
-        controlBar();
     }
 
     //call the YushunVisual and run it
