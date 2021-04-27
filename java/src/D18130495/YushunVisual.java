@@ -1,11 +1,6 @@
 package D18130495;
 
 import ddf.minim.*;
-import ddf.minim.AudioBuffer;
-import ddf.minim.AudioInput;
-import ddf.minim.AudioPlayer;
-import processing.core.PVector;
-import processing.core.PApplet;
 import ddf.minim.analysis.*;
 import java.util.ArrayList;
 import ie.tudublin.Visual;
@@ -103,11 +98,6 @@ public class YushunVisual extends Visual {
 
     public void draw() {
         background(0);
-        stroke(255);
-        float halfHeight = height / 2;
-        float average = 0;
-        float sum = 0;
-        float lastX = width / 2, lastY = height / 2;
 
         switch (which)
         {
