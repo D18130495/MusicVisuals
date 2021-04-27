@@ -33,11 +33,6 @@ public abstract class Visual extends PApplet
   		smoothedBands = new float[bands.length];
 	}
 
-	public void backgroundImage() {
-    	image = loadImage("backgroundImg.jpg");
-		background(0);
-	}
-
 	float log2(float f) {
 		return log(f) / log(2.0f);
 	}
