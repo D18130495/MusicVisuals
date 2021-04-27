@@ -248,7 +248,6 @@ public class YushunVisual extends Visual {
             }
             case 4:
             {
-                backgroundImage();
                 getFFT().forward(getAudioPlayer().mix);
                 setBands(getFFT().getSpectrumReal());                
                 noStroke();
@@ -265,17 +264,27 @@ public class YushunVisual extends Visual {
                                 fill(255);
                                 ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
                                 break;
-                            } else if(j >= 256 && abs(getBands()[1]) * 50 > 300) {
+                            } else if(j >= 256 && abs(getBands()[1]) * 50 > 400) {
                                 newRect();
                                 fill(255);
                                 ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
                                 break;
-                            } else if(j >= 512 && abs(getBands()[1]) * 50 > 100) {
+                            } else if(j >= 512 && abs(getBands()[1]) * 50 > 300) {
                                 newRect();
                                 fill(255);
                                 ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
                                 break;
-                            } else if(j >= 1024 && abs(getBands()[1]) * 50 > 5) {
+                            } else if(j >= 1024 && abs(getBands()[1]) * 50 > 200) {
+                                newRect();
+                                fill(255);
+                                ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
+                                break;
+                            } else if(j >= 2048 && abs(getBands()[1]) * 50 > 100) {
+                                newRect();
+                                fill(255);
+                                ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
+                                break;
+                            } else if(j >= 3072 && abs(getBands()[1]) * 50 > 5) {
                                         newRect();
                                         newRect();
                                         newRect();
