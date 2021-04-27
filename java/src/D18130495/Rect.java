@@ -1,7 +1,8 @@
 package D18130495;
+
 import ie.tudublin.Visual;
 
-public class Rect extends Visual{
+public class Rect {
     private int x;
     private int y;
 
