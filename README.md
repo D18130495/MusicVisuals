@@ -1,6 +1,6 @@
 # Music Visualiser Project
 
-Name:
+Name: Yushun Zeng
 
 Student Number: 
 
