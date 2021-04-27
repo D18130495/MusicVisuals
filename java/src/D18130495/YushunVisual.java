@@ -18,8 +18,7 @@ public class YushunVisual extends Visual {
     ArrayList<Circle> circle3 = new ArrayList<Circle>();
     ArrayList<Circle> circle4 = new ArrayList<Circle>();
     ArrayList<Rect> rect = new ArrayList<Rect>();
-    ArrayList<Rect> rect2 = new ArrayList<Rect>();
-    //ArrayList<PVector> pixel = new ArrayList<PVector>();
+    ArrayList<PVector> pixel = new ArrayList<PVector>();
     float[] lerpedBuffer;
 
     private PImage image;
@@ -48,20 +47,19 @@ public class YushunVisual extends Visual {
         frameRate(60);
         smooth();
 
-        image = loadImage("backgroundImg.png");
-        for(int x = 0; x < width; x++)
+        image = loadImage("1.png");
+        for(int x = 0; x < image.width; x++)
         {
-            for(int y = 0; y < height; y++)
+            for(int y = 0; y < image.height; y++)
             {
                 int index = x + y * image.width;
                 float  b = brightness(image.pixels[index]);
-                // if(b > 1)
-                    rect.add(new Rect(x, y));
-
-
-                //pixel.add(new PVector(x, y));
+                if(b == 255) {
+                    pixel.add(new PVector(x, y));
+                }
             }
         }
+        rect.add(new Rect(1, 1));
     }
 
     //use to pause the visual
@@ -92,27 +90,13 @@ public class YushunVisual extends Visual {
         endShape(CLOSE);
     }
 
-    // public void newCircle() {
-    //     for(int x = 0; x < width; x++)
-    //     {
-    //         for(int y = 0; y < height; y++)
-    //         {
-    //             spots.add(new PVector(x, y));
-    //         }
-    //     }
-    //     PVector spot = spots.get((int)random(spots.size()));
-    //     int x = (int)spot.x;
-    //     int y = (int)spot.y;
-    //     start2021.add(new Start2021(x, y));
-    // }
-
-    
-
     public void newRect() {
-        Rect r = rect.get((int)random(0, rect.size()));
-        int x = (int)r.getX();
-        int y = (int)r.getY();
-        rect2.add(new Rect(x, y));
+        int p = (int)random(0, pixel.size());
+        PVector r = pixel.get(p);
+        int x = (int)r.x;
+        int y = (int)r.y;
+        rect.add(new Rect(x, y));
+        pixel.remove(p);
     }    
 
     float lerpedAverage = 0;
@@ -152,7 +136,6 @@ public class YushunVisual extends Visual {
                 
                 for (int i = 0; i < getAudioPlayer().left.size(); i+=4){
                     stroke(color(255 - sin(map(i,0, getAudioPlayer().left.size(),0, 1) * PI) * 255, 0, sin(map(i,0, getAudioPlayer().left.size(),0, 1) * PI) * 255));
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getBands()[i], 0.08f);
                     float r = map(i, 0, getAudioPlayer().left.size(), 0, 2 * PI);
                     float s = abs(getAudioPlayer().left.get(i))*range;
                     line(sin(r) * (size), cos(r) * (size), sin(r) * (s + size), cos(r) * (s + size));
@@ -265,36 +248,49 @@ public class YushunVisual extends Visual {
             }
             case 4:
             {
+                backgroundImage();
                 getFFT().forward(getAudioPlayer().mix);
-                setBands(getFFT().getSpectrumReal());
-                background(0);
+                setBands(getFFT().getSpectrumReal());                
+                noStroke();
+               
+                for(int j = 0; j < rect.size(); j++) {
+                    fill(255);
+                    rect(rect.get(j).getX(), rect.get(j).getY(), 3, 3);
 
-                newRect();
-                
-                // for(int j = 0; j < pixel.size(); j++) {
-                //     rect(pixel.get(j).x, pixel.get(j).y, 1, 1);
-                // }
-                for(int j = 0; j < rect2.size(); j++) {
-                    
-                    fill(150);
-                    rect(rect2.get(j).getX(), rect2.get(j).getY(), 1, 1);
+                    if(j == (rect.size() - 1))
+                    {
+                        
+                            if(j < 256 && abs(getBands()[1]) * 50 > 500) {
+                                newRect();
+                                fill(255);
+                                ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
+                                break;
+                            } else if(j >= 256 && abs(getBands()[1]) * 50 > 300) {
+                                newRect();
+                                fill(255);
+                                ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
+                                break;
+                            } else if(j >= 512 && abs(getBands()[1]) * 50 > 100) {
+                                newRect();
+                                fill(255);
+                                ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
+                                break;
+                            } else if(j >= 1024 && abs(getBands()[1]) * 50 > 5) {
+                                        newRect();
+                                        newRect();
+                                        newRect();
+                                        newRect();
+                                        newRect();
+                                        newRect();
+                                        newRect();
+                                        newRect();
+                                        newRect();
+                                        fill(255);
+                                        ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
+                                        break;
+                            }
+                    }
                 }
-
-
-
-
-
-                //newCircle();
-                // for(int j = 0; j < start2021.size(); j++) {
-                    
-                //     if(abs(getBands()[j] * 10) >= 30) {
-                //         start2021.get(j).update();
-                //     }
-                //     ellipse(start2021.get(j).getX(), start2021.get(j).getY(), start2021.get(j).getRadius(), start2021.get(j).getRadius());
-                //     if(start2021.get(j).getRadius() >= 50) {
-                //         start2021.remove(j);
-                //     }
-                // }
                 break;
             }
         }
