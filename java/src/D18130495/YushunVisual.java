@@ -2,35 +2,30 @@ package D18130495;
 
 import ddf.minim.*;
 import ddf.minim.analysis.*;
+import processing.core.*;
 import java.util.ArrayList;
 import ie.tudublin.Visual;
-import processing.core.*;
+
 
 public class YushunVisual extends Visual {
-
-    ArrayList<Circle> circle1 = new ArrayList<Circle>();
-    ArrayList<Circle> circle2 = new ArrayList<Circle>();
-    ArrayList<Circle> circle3 = new ArrayList<Circle>();
-    ArrayList<Circle> circle4 = new ArrayList<Circle>();
 
     //this two arraylist use for the fourth visual
     ArrayList<Rect> rect = new ArrayList<Rect>();
     ArrayList<PVector> pixel = new ArrayList<PVector>();
 
+    //this image is use of the fourth visual
+    private PImage image;
+
     float[] lerpedBuffer;
 
     TwoChannelDance tcd = new TwoChannelDance(this);
     Draw dr = new Draw(this);
-
-    //this image is use of the fourth visual
-    private PImage image;
+    Popout po = new Popout(this);
 
     public void settings() {
         size(1024, 640);
     }
 
-    float y = 200;
-    float lerpedY = y;
     public int which = 0;
 
     public int getWhich() {
@@ -79,21 +74,6 @@ public class YushunVisual extends Visual {
         }
     }
 
-    //Background for first visual
-    public void dance(int x, int y, int num, int br, int ro) {
-        beginShape();
-        for (int d = 0; d < num; d++) {
-            stroke(100, 150, 220, 110);
-            float ping = cos(radians(millis()/10 + 20 * d));
-            float r = br + map(ping, -1, 1, -ro, ro);
-            int p = (int)map(abs(getBands()[d]), 0, 1, 3, 3.1f);
-            strokeWeight(p);
-            fill(random(100, 200), random(100, 200), 200, 4);
-            vertex(x + cos(radians(d * 360 / num)) * r * 1.1f, y + sin(radians(d * 360 / num)) * r * 1.1f);
-        }
-        endShape(CLOSE);
-    } 
-
     public void draw() {
         background(0);
 
@@ -108,38 +88,7 @@ public class YushunVisual extends Visual {
             }
             case 1:
             {
-                //Draw the background
-                translate(width/2, height/2);
-                getFFT().forward(getAudioPlayer().mix);
-                pushMatrix();
-                setBands(getFFT().getSpectrumReal());
-                for (int d = 120; d <= 540; d += 60) {
-                    int vertex1 = (int)map(d, 0, 300, 3, 15);
-                    dance(0, 0, vertex1, d, d / 15);
-                }
-                
-                //Two-channel dance, inner use left channel, outer use right channel, this shape is for left channel
-                int size = 150;
-                int range = 130;
-                
-                for (int i = 0; i < getAudioPlayer().left.size(); i+=4){
-                    stroke(color(255 - sin(map(i,0, getAudioPlayer().left.size(),0, 1) * PI) * 255, 0, sin(map(i,0, getAudioPlayer().left.size(),0, 1) * PI) * 255));
-                    float r = map(i, 0, getAudioPlayer().left.size(), 0, 2 * PI);
-                    float s = abs(getAudioPlayer().left.get(i))*range;
-                    line(sin(r) * (size), cos(r) * (size), sin(r) * (s + size), cos(r) * (s + size));
-                }
-
-                size = 300;
-
-                //This shape is for right channel 
-                for (int i=0;i<getAudioPlayer().right.size();i+=4){
-                    stroke(color(255 - sin(map(i,0, getAudioPlayer().right.size(),0, 1) * PI) * 255, 0, sin(map(i,0, getAudioPlayer().right.size(),0, 1) * PI) * 255));
-                    float r = map(i, 0, getAudioPlayer().right.size(), 0, 2 * PI);
-                    float s = abs(getAudioPlayer().right.get(i))*range;
-                    line(sin(r) * (size), cos(r) * (size), sin(r) * (s + size), cos(r) * (s + size));
-                  }
-                popMatrix();
-
+                tcd.render();
                 break;
             }
             case 2:
@@ -198,40 +147,7 @@ public class YushunVisual extends Visual {
             }
             case 3:
             {
-                getFFT().forward(getAudioPlayer().mix);
-                pushMatrix();
-                setBands(getFFT().getSpectrumReal());
-
-                //create circle from four different direction
-                for(int i = 0; i < 1; i++) {
-                    if(getBands()[i] != 0) {
-                        Circle c1 = new Circle(width / 2, 0, (int)random(getBands()[i], getBands()[i] * 1.2f));
-                        circle1.add(c1);
-                        Circle c2 = new Circle(width / 2, height, (int)random(getBands()[i], getBands()[i] * 1.2f));
-                        circle2.add(c2);
-                        Circle c3 = new Circle(0, height / 2, (int)random(getBands()[i], getBands()[i] * 1.2f));
-                        circle3.add(c3);
-                        Circle c4 = new Circle(width, height / 2, (int)random(getBands()[i], getBands()[i] * 1.2f));
-                        circle4.add(c4);
-                    }
-                   
-                    //update circles X and Y, make it move
-                    for(int j = 0; j < circle1.size(); j++) {
-                        noStroke();
-                        fill(113, random(getBands()[1], 200), 174);
-                        circle1.get(j).update1();
-                        ellipse(circle1.get(j).getX(), circle1.get(j).getY(), circle1.get(j).getRadius(), circle1.get(j).getRadius());
-                        circle2.get(j).update2();
-                        ellipse(circle2.get(j).getX(), circle2.get(j).getY(), circle2.get(j).getRadius(), circle2.get(j).getRadius());
-                        circle3.get(j).update3();
-                        ellipse(circle3.get(j).getX(), circle3.get(j).getY(), circle3.get(j).getRadius(), circle3.get(j).getRadius());
-                        circle4.get(j).update4();
-                        ellipse(circle4.get(j).getX(), circle4.get(j).getY(), circle4.get(j).getRadius(), circle4.get(j).getRadius());
-                    }
-                }
-
-                popMatrix();
-                
+                po.render();
                 break;
             }
             case 4:
