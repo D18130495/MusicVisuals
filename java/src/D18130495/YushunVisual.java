@@ -12,10 +12,17 @@ public class YushunVisual extends Visual {
     ArrayList<Circle> circle2 = new ArrayList<Circle>();
     ArrayList<Circle> circle3 = new ArrayList<Circle>();
     ArrayList<Circle> circle4 = new ArrayList<Circle>();
+
+    //this two arraylist use for the fourth visual
     ArrayList<Rect> rect = new ArrayList<Rect>();
     ArrayList<PVector> pixel = new ArrayList<PVector>();
+
     float[] lerpedBuffer;
 
+    TwoChannelDance tcd = new TwoChannelDance(this);
+    Draw dr = new Draw(this);
+
+    //this image is use of the fourth visual
     private PImage image;
 
     public void settings() {
@@ -42,6 +49,8 @@ public class YushunVisual extends Visual {
         frameRate(60);
         smooth();
 
+        //This is use for the fourth visual to parsing the image
+        //Then store the pixel position in the pixel arraylist
         image = loadImage("1.png");
         for(int x = 0; x < image.width; x++)
         {
@@ -83,18 +92,7 @@ public class YushunVisual extends Visual {
             vertex(x + cos(radians(d * 360 / num)) * r * 1.1f, y + sin(radians(d * 360 / num)) * r * 1.1f);
         }
         endShape(CLOSE);
-    }
-
-    public void newRect() {
-        int p = (int)random(0, pixel.size());
-        PVector r = pixel.get(p);
-        int x = (int)r.x;
-        int y = (int)r.y;
-        rect.add(new Rect(x, y));
-        pixel.remove(p);
-    }    
-
-    float lerpedAverage = 0;
+    } 
 
     public void draw() {
         background(0);
@@ -238,58 +236,7 @@ public class YushunVisual extends Visual {
             }
             case 4:
             {
-                getFFT().forward(getAudioPlayer().mix);
-                setBands(getFFT().getSpectrumReal());                
-                noStroke();
-               
-                for(int j = 0; j < rect.size(); j++) {
-                    fill(255);
-                    rect(rect.get(j).getX(), rect.get(j).getY(), 3, 3);
-
-                    if(j == (rect.size() - 1))
-                    {
-                        
-                            if(j < 256 && abs(getBands()[1]) * 50 > 500) {
-                                newRect();
-                                fill(255);
-                                ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
-                                break;
-                            } else if(j >= 256 && abs(getBands()[1]) * 50 > 400) {
-                                newRect();
-                                fill(255);
-                                ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
-                                break;
-                            } else if(j >= 512 && abs(getBands()[1]) * 50 > 300) {
-                                newRect();
-                                fill(255);
-                                ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
-                                break;
-                            } else if(j >= 1024 && abs(getBands()[1]) * 50 > 200) {
-                                newRect();
-                                fill(255);
-                                ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
-                                break;
-                            } else if(j >= 2048 && abs(getBands()[1]) * 50 > 100) {
-                                newRect();
-                                fill(255);
-                                ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
-                                break;
-                            } else if(j >= 3072 && abs(getBands()[1]) * 50 > 5) {
-                                        newRect();
-                                        newRect();
-                                        newRect();
-                                        newRect();
-                                        newRect();
-                                        newRect();
-                                        newRect();
-                                        newRect();
-                                        newRect();
-                                        fill(255);
-                                        ellipse(rect.get(j).getX(), rect.get(j).getY(), 20, 20);
-                                        break;
-                            }
-                    }
-                }
+                dr.render();
                 break;
             }
         }
