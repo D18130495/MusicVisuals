@@ -2,7 +2,7 @@
 
 Name: Yushun Zeng
 
-Student Number: 
+Student Number: D18130495
 
 ## Instructions
 - Fork this repository and use it a starter project for your assignment
@@ -12,7 +12,7 @@ Student Number:
 - Check out the WaveForm and AudioBandsVisual for examples of how to call the Processing functions from other classes that are not subclasses of PApplet
 
 # Description of the assignment
-
+- Wellcome to YushunVisual! In this assignment You will experience four different visual effects. There is a controller can help you easily to swith between each visuals.
 # Instructions
 
 # How it works
