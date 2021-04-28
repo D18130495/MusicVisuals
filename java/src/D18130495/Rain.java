@@ -45,20 +45,20 @@ public class Rain
 
         //top line
         for (int x = 0; x < 60; x += 5) {
-            float dist = yv.getBands()[x];
-            float position = yv.random(dist, yv.width);
-            yv.stroke(yv.random(dist, 200), yv.random(dist, 150), 200);
+            float color = yv.getBands()[x]; //get the current fft us for color
+            float position = yv.random(color, yv.width); //find a random position to draw the line
+            yv.stroke(yv.random(color, 200), yv.random(color, 150), 200);
             yv.strokeWeight(5);
-            yv.line(position - yv.width / 2, -(yv.height / 2), position - yv.width / 2, dist * 2 + 40 - yv.height / 2);
+            yv.line(position - yv.width / 2, -(yv.height / 2), position - yv.width / 2, color * 2 + 40 - yv.height / 2);
         }
 
         //bottom line
         for (int x = 0; x < 60; x += 5) {
-            float dist = yv.getBands()[x];
-            float position = yv.random(dist, yv.width);
-            yv.stroke(yv.random(dist, 200), yv.random(dist, 150), 200);
+            float color = yv.getBands()[x]; //get the current fft us for color
+            float position = yv.random(color, yv.width); //find a random position to draw the line
+            yv.stroke(yv.random(color, 200), yv.random(color, 150), 200);
             yv.strokeWeight(5);
-            yv.line(position - yv.width / 2, yv.height / 2, position - yv.width / 2, -(dist * 2) - 40 + yv.height / 2);
+            yv.line(position - yv.width / 2, yv.height / 2, position - yv.width / 2, -(color * 2) - 40 + yv.height / 2);
         }
         yv.popMatrix();
     }
