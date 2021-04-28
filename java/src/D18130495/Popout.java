@@ -18,11 +18,11 @@ public class Popout
 
     public void render()
     {
-        yv.getFFT().forward(yv.getAudioPlayer().mix);
+        yv.getFFT().forward(yv.getAudioPlayer().mix); //load the audio to the fft
         yv.pushMatrix();
-        yv.setBands(yv.getFFT().getSpectrumReal());
+        yv.setBands(yv.getFFT().getSpectrumReal()); //load the fft to bands
 
-        //create circle from four different direction
+        //create circle from four different direction and add them to four arraylists
         for(int i = 0; i < 1; i++) {
             if(yv.getBands()[i] != 0) {
                 Circle c1 = new Circle(yv.width / 2, 0, (int)yv.random(yv.getBands()[i], yv.getBands()[i] * 1.2f));
