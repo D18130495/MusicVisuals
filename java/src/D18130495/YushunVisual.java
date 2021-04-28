@@ -16,16 +16,17 @@ public class YushunVisual extends Visual {
     //this image is use of the fourth visual
     private PImage image;
 
+    //use for the second visual the smooth the shape
     float[] lerpedBuffer;
+    float[] lerpedBuffer2;
 
+    //create four visuals
     TwoChannelDance tcd = new TwoChannelDance(this);
     Draw dr = new Draw(this);
     Popout po = new Popout(this);
+    Rain ra = new Rain(this);
 
-    public void settings() {
-        size(1024, 640);
-    }
-
+    //use for switch the visuals
     public int which = 0;
 
     public int getWhich() {
@@ -35,14 +36,19 @@ public class YushunVisual extends Visual {
     public void setWhich(int which) {
         this.which = which;
     }
+    
+    public void settings() {
+        size(1024, 640);
+    }    
 
     public void setup() {
         colorMode(RGB);
         startMinim();
         loadAudio("music1.mp3");
-        lerpedBuffer = new float[width];
         frameRate(60);
         smooth();
+        lerpedBuffer = new float[width];
+        lerpedBuffer2 = new float[width];
 
         //This is use for the fourth visual to parsing the image
         //Then store the pixel position in the pixel arraylist
@@ -60,7 +66,7 @@ public class YushunVisual extends Visual {
         }
         rect.add(new Rect(1, 1));
     }
-
+    
     //use to pause the visual
     public void keyPressed() {
         if(getAudioPlayer().isPlaying()) {
@@ -93,56 +99,7 @@ public class YushunVisual extends Visual {
             }
             case 2:
             {
-                getFFT().forward(getAudioPlayer().mix);
-                pushMatrix();
-                translate(width/2, height/2);
-                setBands(getFFT().getSpectrumReal());
-
-                //Circle
-                float angle = 0;
-                float cir = 180;
-
-                for (int i = 0; i < 360; i++) {
-                    float dist = getBands()[i] / 2;
-                    noStroke();
-                    fill(random(dist, 200), random(dist, 255), 200);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getBands()[i], 0.08f);
-                    ellipse(sin(angle) * (cir + lerpedBuffer[i]), -cos(angle) * (cir + dist), abs(lerpedBuffer[i] * 4), abs(lerpedBuffer[i] * 4));
-                    angle += PI / 20;
-                }
-
-                //Ring
-                float ang = 0;
-                int thick = 15;
-
-                for (int j = 0; j < 360; j++) {
-                    float dist = getBands()[j];
-                    stroke(random(dist, 200), random(dist, 150), 200, 180);
-                    strokeWeight(3);
-                    line(-cos(ang) * (cir + dist + thick), sin(ang) * (cir + dist + thick), -cos(ang) * (cir - dist - thick), sin(ang) * (cir - dist - thick));
-                    ang += PI / 40;
-                }
-
-                //top line
-                for (int x = 0; x < 60; x += 5) {
-                    float dist = getBands()[x];
-                    float position = random(dist, width);
-                    stroke(random(dist, 200), random(dist, 150), 200);
-                    strokeWeight(5);
-                    line(position - width / 2, -(height / 2), position - width / 2, dist * 2 + 40 - height / 2);
-                }
-
-                //bottom line
-                for (int x = 0; x < 60; x += 5) {
-                    float dist = getBands()[x];
-                    float position = random(dist, width);
-                    stroke(random(dist, 200), random(dist, 150), 200);
-                    strokeWeight(5);
-                    line(position - width / 2, height / 2, position - width / 2, -(dist * 2) - 40 + height / 2);
-                }
-
-                popMatrix();
-
+                ra.render();
                 break;
             }
             case 3:
