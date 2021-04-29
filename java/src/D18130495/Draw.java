@@ -28,27 +28,24 @@ public class Draw
                 //The below if else statement use to speed up the drawing.
                 //When j less than 1024 it will more clearly see how the process of drawing is synchronized to the music.
 
-                if(j < 256 && yv.abs(yv.getBands()[1]) * 50 > 500) {
+                if(j < 512 && yv.abs(yv.getBands()[1]) * 50 > 150) {
                     newRect();
                     yv.fill(255);
                     yv.ellipse(yv.rect.get(j).getX(), yv.rect.get(j).getY(), 20, 20);
                     break;
-                } else if(j >= 256 && yv.abs(yv.getBands()[1]) * 50 > 400) {
+                } else if(j >= 512 && yv.abs(yv.getBands()[1]) * 50 > 125) {
                     newRect();
                     yv.fill(255);
                     yv.ellipse(yv.rect.get(j).getX(), yv.rect.get(j).getY(), 20, 20);
                     break;
-                } else if(j >= 512 && yv.abs(yv.getBands()[1]) * 50 > 300) {
+                } else if(j >= 1024 && yv.abs(yv.getBands()[1]) * 50 > 100) {
                     newRect();
                     yv.fill(255);
                     yv.ellipse(yv.rect.get(j).getX(), yv.rect.get(j).getY(), 20, 20);
                     break;
-                } else if(j >= 1024 && yv.abs(yv.getBands()[1]) * 50 > 200) {
+                } else if(j >= 2048 && yv.abs(yv.getBands()[1]) * 50 > 75) {
                     newRect();
-                    yv.fill(255);
-                    yv.ellipse(yv.rect.get(j).getX(), yv.rect.get(j).getY(), 20, 20);
-                    break;
-                } else if(j >= 2048 && yv.abs(yv.getBands()[1]) * 50 > 100) {
+                    newRect();
                     newRect();
                     yv.fill(255);
                     yv.ellipse(yv.rect.get(j).getX(), yv.rect.get(j).getY(), 20, 20);
