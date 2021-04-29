@@ -12,21 +12,16 @@ The first music use for visual 1 - 3. ![An music](java/data/music.mp3)
 The second music use for visual 4. ![An music](java/data/music1.mp3)
 
 1. First visual: In this visual, there are two big circles represent two different channels, inner circle for left channel and outer for right channel.
-
 				 Also, there are some polygons as background and they can shake, the width of the edges of each polygon can become more width depend on the amplitude of the audio.
 
 2. Second visual: In this visual, there is a big circle in the center of the screen, and this circle is constructed by many sticks, under the sticks will have many 					  circle that has been synchronized to the music, it can become bigger and have different color.
-
 				  At top and bottom will have some sticks to make this visual more beautiful and also synchronized to the music.
 
 3. Third visual: In this visual, many circles are generated from the center of the four sides of the screen, and diverge to the middle of the screen.
-
 				 This circles have different size and color, both of this has been synchronized to the music.
 
 4. Fourth visual: This is the most amazing visual in this assignment.
-
 				  In this visual, you can see how the thousand of pixels form a picture. This visual has been appropriately synchronized to the music, the number of pixels drawn per second is related to the amplitude of the audio.
-
 				  In this visual I decided to use an instrumental music which can make it more enjoyable.
 
 # Instructions
@@ -60,7 +55,6 @@ First of all, I have to say thanks to last year students' assignment which inspi
 3. The main difficulty of the first element is how to fill the color and make it looks beautiful. If I just fill this circle with rainbow color, the start color is red and end color is blue, this two color will link together and looks uncomfortable.
 ![An image](images/how1.PNG)
 So, I try two combine two rainbow color together, make two rainbows red color link together and blue color link together. 
-
 Start with red and end with blue(left) range(3pi / 2 - pi / 2), start with red and end with blue(right) range(- pi / 2, pi / 2).
 ![An image](images/how2.PNG)
 ## Second visual: Rain
