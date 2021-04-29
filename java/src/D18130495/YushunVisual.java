@@ -44,7 +44,7 @@ public class YushunVisual extends Visual {
     public void setup() {
         colorMode(RGB);
         startMinim();
-        loadAudio("music1.mp3");
+        loadAudio("music.mp3");
         frameRate(60);
         smooth();
         lerpedBuffer = new float[width];

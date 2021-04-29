@@ -21,7 +21,13 @@ The first music use for visual 1 - 3, and the second music use for visual 4.
 				  In this visual I decided to use an instrumental music which can make it more enjoyable. 
 
 # Instructions
-
+When you run this program, it will generate two black screens, one for controller and another is to show the visual.
+- This is what the controller looks like, and there are 5 buttons on it, press first button to start the visual and press again for pause.
+![An image](images/controller.png)
+- This is the screen to show the visual.
+![An image](images/screen.png)
+1. Press start buttons to start the visual, it will automatically jump to the first visual(The first visual botton "Two-channel dance" will light up).
+![An image](first.png)
 # How it works
 
 # What I am most proud of in the assignment
