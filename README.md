@@ -12,7 +12,14 @@ Student Number: D18130495
 - Check out the WaveForm and AudioBandsVisual for examples of how to call the Processing functions from other classes that are not subclasses of PApplet
 
 # Description of the assignment
-- Wellcome to YushunVisual! In this assignment You will experience four different visual effects. There is a controller can help you easily to swith between each visuals.
+Wellcome to YushunVisual! In this assignment You will experience four different visual effects. There is a controller that can help you easily switch between each visual.
+
+	1. First visual:
+	2. Second visual:
+	3. Third visual:
+	4. Fourth visual: This is the most amazing visual in this assignment. 
+	In this visual, you can see how the thousand of pixels form a picture. This visual has been appropriately synchronized to the music, the number of pixels drawn per second is related to the amplitude of the audio.
+
 # Instructions
 
 # How it works
