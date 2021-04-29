@@ -23,11 +23,22 @@ The first music use for visual 1 - 3, and the second music use for visual 4.
 # Instructions
 When you run this program, it will generate two black screens, one for controller and another is to show the visual.
 - This is what the controller looks like, and there are 5 buttons on it, press first button to start the visual and press again for pause.
-![An image](images/controller.png)
+![An image](images/controller.PNG)
 - This is the screen to show the visual.
-![An image](images/screen.png)
+![An image](images/screen.PNG)
 1. Press start buttons to start the visual, it will automatically jump to the first visual(The first visual botton "Two-channel dance" will light up).
-![An image](first.png)
+![An image](images/first.PNG)
+2. Press the thrid button switch to the second visual "Rain".
+![An image](images/second.PNG)
+3. Press the fourth button switch to the third visual "Pop-out".
+![An image](images/third.PNG)
+4. Press the fifth button switch to the fourth visual "Draw", there is a special music use for this visual, and should go to java\src\D18130495 modify YushunVisual.java loadAudio("music1.mp3");, this visual is especially synchronized with the music.
+- The start of this visual will looks like:
+![An image](images/fourth1.PNG)
+- The end of the visual will looks like:
+![An image](images/fourth1.PNG)
+- The original image of this visual:
+![An image](images/original.PNG)
 # How it works
 
 # What I am most proud of in the assignment
