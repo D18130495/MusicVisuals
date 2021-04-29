@@ -1,8 +1,9 @@
 package D18130495;
 
 import processing.core.*;
+import ie.tudublin.Visual;
 
-public class Control extends PApplet {
+public class Control extends Visual {
 
     int count = 0;
     int rectLh = 20;
