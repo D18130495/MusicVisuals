@@ -47,8 +47,29 @@ When you run this program, it will generate two black screens, one for controlle
 # How it works
 First of all, I have to say thanks to last year students' assignment which inspire me about the controller idea!
 ## Controller
-1. At the start of this assignment, I created two classes, one is YushunVisual.java, this is the subclass of ie\tudublin\Visual.java which mean I extends Visual.java. This is used as main class of this project, it will call the other class and show the different visuals. The second class I created is Controller.java, which is used to switch each visual.
+1. At the start of this assignment, I created two classes, one is YushunVisual.java, this is the subclass of ie\tudublin\Visual.java which mean I extends Visual.java. This is used as main class of this project, it will call the other class and show the different visuals. The second class I created is Control.java, which is used to switch each visual.
 2. The main difficulty of this part is how to link each class today and make the controller work. The main idea is in the ie\tudublin\Main.java new Controller object and use this Controller object to new YushunVisual object. The usage of (this.) is the key to connect each object together.
+- In the Main.java call Controller
+```Java
+	Control control = new Control();
+
+	public static void main(String[] args)
+	{
+		Main main = new Main();
+		main.control();
+		main.control.startUI();
+	}
+```
+- In the Control.java call YushunVisual
+```Java
+	YushunVisual visual = new YushunVisual();
+
+	public void startUI()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch(a, this.visual);		
+	}
+```
 ## First visual: Two-channel dance
 1. This visual have two elements in it. The first element is two big circles, inner circle synchronized to the left channel of the music and outer circle is synchronized to the right channel of the music. The second element is the multiple polygons as the background, all the polygons can shake and the width of each polygon are synchronized to the music.
 2. In this visual, I used lots of sin and cos to make circle and find position of vertex to make polygons. For the two circles simply use sin to find the position of startX and endX, use cos to find startY and endY. For the second background polygons, it has same concept to find the position of polygon, but this time is to find the vertex of it, and use beginShape() endShape(CLOSE) to link each vertex to shape a polygon.
@@ -92,15 +113,15 @@ Adding the change variable to radian will generate different length of radius, a
 2. This is the most excited part I made in this assignment, it use lots of processing method and OOP concept.
 - Firstly, I use PImage data type to load image in to YushunVisual.java. After this I parsing the image, there are 1024 X 640(the size of the screen) pixels on the screen, use two loops to traverse each piexl and use brightness() function to determine which pixels have to be store in the pixel arraylist. (brightness() will return the highest value color of (R, G, B))
 ```Java
-PImage image = loadImage("1.png");
+PImage image = loadImage("1.png"); //load image
         for(int x = 0; x < image.width; x++)
         {
             for(int y = 0; y < image.height; y++)
             {
-                int index = x + y * image.width;
-                float  b = brightness(image.pixels[index]);
+                int index = x + y * image.width; //find the index of current pixel
+                float  b = brightness(image.pixels[index]); //brightness() will return the greatest value of (R, G, B)
                 if(b == 255) {
-                    pixel.add(new PVector(x, y));
+                    pixel.add(new PVector(x, y)); //store in the PVector arraylist
                 }
             }
         }
@@ -139,7 +160,7 @@ PImage image = loadImage("1.png");
 2. I am also proud of the usage of sin and cos to make different circle and colors.
 - In the visual 1, use sin and pi to generate two symmetrical color rainbows which I mentioned in the "How it works: First visual: Two-channel dance", this took me a long time to think, searched resources, and did calculations.
 - How to make the background polygon shake is also took me long time to think. After draw some graph and analysis, I find the solution of it which I mentioned in the "How it works: First visual: Two-channel dance", both of the difficulty are caused by how to draw and change the shape of circle, and how to use sin and cos to solve the problem.
-3. The last thing that makes me proud is connected Main.java, YushunVisual.java and Controller.java together.
+3. The last thing that makes me proud is connected Main.java, YushunVisual.java and Control.java together.
 - This help me better understand how the object worked in different class.
 # Youtube video
 [![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
