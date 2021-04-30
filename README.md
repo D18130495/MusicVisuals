@@ -7,10 +7,12 @@ Student Number: D18130495
 # Description of the assignment
 Wellcome to YushunVisual! In this assignment You will experience four different visual effects. There is a controller that can help you easily switch between each visual.
 
-The first music use for visual 1 - 3. 
+The first music use for visual 1 - 3.
+
 [![An music](images/music.jpg)](java/data/music.mp3)
 
-The second music use for visual 4. 
+The second music use for visual 4.
+
 [![An music](images/music1.jpg)](java/data/music1.mp3)
 
 1. First visual: In this visual, there are two big circles represent two different channels, inner circle for left channel and outer for right channel.
