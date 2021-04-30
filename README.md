@@ -159,10 +159,12 @@ PImage image = loadImage("1.png");
 - The visual feeling of the final product is also made me very proud.
 2. I am also proud of the usage of sin and cos to make different circle and colors.
 - In the visual 1, use sin and pi to generate two symmetrical color rainbows which I mentioned in the "How it works: First visual: Two-channel dance", this took me a long time to think, searched resources, and did calculations.
-- How to make the background polygon shake is also took me long time to think. After draw some graph and analysis, I find the solution of it which I mentioned in the "How it works: First visual: Two-channel dance", both of the difficulty are caused by how to draw and change the shape of circle, and how to use sin and cos to solve the problem.
+- How to make the background polygon shake is also took me long time to think. After draw some graph and analysis, I find the solution of it which I mentioned in the "How it works: First visual: Two-channel dance", both of the difficulties are caused by how to draw and change the shape of circle, and how to use sin and cos to solve the problem.
 3. The last thing that makes me proud is connected Main.java, YushunVisual.java and Control.java together.
 - This help me better understand how the object worked in different class.
 # Youtube video
+## Visual 1 - 3
+## visual 4
 [![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
 
 
