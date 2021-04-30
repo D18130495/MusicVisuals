@@ -52,7 +52,8 @@ First of all, I have to say thanks to last year students' assignment which inspi
 ## Fiest visual: Two-channel dance
 1. This visual have two elements in it. The first element is two big circles, inner circle synchronized to the left channel of the music and outer circle is synchronized to the right channel of the music. The second element is the multiple polygons as the background, all the polygons can shake and the width of each polygon are synchronized to the music.
 2. In this visual, I used lots of sin and cos to make circle and find position of vertex to make polygons. For the two circles simply use sin to find the position of startX and endX, use cos to find startY and endY. For the second background polygons, it has same concept to find the position of polygon, but this time is to find the vertex of it, and use beginShape() endShape(CLOSE) to link each vertex to shape a polygon.
-3. The main difficulty of the first element is how to fill the color and make it looks beautiful. If I just fill this circle with rainbow color, the start color is red and end color is blue, this two color will link together and looks uncomfortable.
+3. The implementation of this visual have two difficulties which make me think a lot.
+- The main difficulty of the first element is how to fill the color and make it looks beautiful. If I just fill this circle with rainbow color, the start color is red and end color is blue, this two color will link together and looks uncomfortable.
 ![An image](images/how1.PNG)
 So, I try two combine two rainbow color together, make two rainbows red color link together and blue color link together.
 Start with red and end with blue(left) range(3pi / 2 - pi / 2), start with red and end with blue(right) range(- pi / 2, pi / 2).
@@ -63,7 +64,7 @@ To achieve this effect I use sin and pi.
 ```
 First use map function, beacse i is always growing, so the value after map is also growing, the R(red) value is continuous decline and B(blue) value is increase, after achieve map value is greater than 0.5, the R(red) value is increase and B(blue) value is decline, so this can fill the circle appropriately.
 
-For the second elements, how to make the polygons shake is the most difficult part.
+- For the second elements, how to make the polygons shake is the most difficult part.
 ```Java
 float radian = yv.cos(yv.radians(yv.millis()/10 + 20 * d));
 float r = radius + yv.map(radian, -1, 1, -changeRange, changeRange);
@@ -85,72 +86,31 @@ I use millis() to return the number, because it will return the milliseconds (th
 - Thirdly, rect object will be created according to the rect arraylist and draw on the screen, rect will be created depend on the size of rect arraylist and music amplitude. Because there are thousand of pixels shoule be drawn on the screen, so I gradually increase the generation speed of pixel.
 3. In this part, I spend the most time on music synchronization and running tests, I also chose a special music for better showing music synchronization and better looking experice.
 # What I am most proud of in the assignment
+- In this assignment, I did lots of seif-study and brainstorm lots of ideas.
+
+| For which visual | What I learned |
+|-----------|-----------|
+|visual 1 | vertex(), beginShape(), endShape(), millis(), usage of sin and cos, usage of different channels |
+|visual 3 | practice concept of object oriented |
+|visual 4 | Pimage class, PVector class, brigthness() |
+
+1. The visual 4 in this assignment is my most proud of. Whether idea and implementation, both made me really excited after achieve the result.
+- In this part, I thought myself new coding skill use processing:
+
+```Java
+PImage image = loadImage("xx.png");
+```
+how to use brightness() to recognit black and white.
+
+how ot use PVector store vertex and some functions of it.
 
 # Markdown Tutorial
 
 This is *emphasis*
 
-This is a bulleted list
-
-- Item
-- Item
-
-This is a numbered list
-
-1. Item
-1. Item
-
 This is a [hyperlink](http://bryanduggan.org)
-
-# Headings
-## Headings
-#### Headings
-##### Headings
-
-This is code:
-
-```Java
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-So is this without specifying the language:
-
-```
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-This is an image using a relative URL:
-
-![An image](images/p8.png)
-
-This is an image using an absolute URL:
-
-![A different image](https://bryanduggandotorg.files.wordpress.com/2019/02/infinite-forms-00045.png?w=595&h=&zoom=2)
 
 This is a youtube video:
 
 [![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
-
-This is a table:
-
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
 
