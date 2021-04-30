@@ -54,9 +54,14 @@ First of all, I have to say thanks to last year students' assignment which inspi
 2. In this visual, I used lots of sin and cos to make circle and find position of vertex to make polygons. For the two circles simply use sin to find the position of startX and endX, use cos to find startY and endY. For the second background polygons, it has same concept to find the position of polygon, but this time is to find the vertex of it, and use beginShape() endShape(CLOSE) to link each vertex to shape a polygon.
 3. The main difficulty of the first element is how to fill the color and make it looks beautiful. If I just fill this circle with rainbow color, the start color is red and end color is blue, this two color will link together and looks uncomfortable.
 ![An image](images/how1.PNG)
-So, I try two combine two rainbow color together, make two rainbows red color link together and blue color link together. 
+So, I try two combine two rainbow color together, make two rainbows red color link together and blue color link together.
 Start with red and end with blue(left) range(3pi / 2 - pi / 2), start with red and end with blue(right) range(- pi / 2, pi / 2).
 ![An image](images/how2.PNG)
+To achieve this effect I use sin and pi.
+```Java
+255 - yv.sin(yv.map(i, 0, yv.getAudioPlayer().left.size(), 0, 1) * yv.PI) * 200, 0, yv.sin(yv.map(i, 0, yv.getAudioPlayer().left.size(), 0, 1) * yv.PI) * 200);
+```
+First use map function, beacse i is always growing, so the value after map is also growing, the R(red) value is continuous decline and B(blue) value is increase, after achieve map value is greater than 0.5, the R(red) value is increase and B(blue) value is decline, so this can fill the circle appropriatly.
 ## Second visual: Rain
 ## Third visual: Pop-out
 ## Fourth visual: Draw

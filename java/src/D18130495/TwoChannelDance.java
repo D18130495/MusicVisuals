@@ -36,10 +36,10 @@ public class TwoChannelDance
        radius = 300;
 
        //This shape is for right channel 
-       for (int i = 0; i < yv.getAudioPlayer().right.size(); i += 4){
-            yv.stroke(yv.sin(yv.map(i, 0, yv.getAudioPlayer().right.size(), 0, 1) * yv.PI) * 200, 0, 255 - yv.sin(yv.map(i, 0, yv.getAudioPlayer().right.size(), 1, 0) * yv.PI) * 200);
-            float r = yv.map(i, 0, yv.getAudioPlayer().right.size(), 0, 2 * yv.PI); //the place of each line of the circle
-            float s = yv.abs(yv.getAudioPlayer().right.get(i)) * stick; //length of the line
+       for (int j = 0; j < yv.getAudioPlayer().right.size(); j += 4){
+            yv.stroke(yv.sin(yv.map(j, 0, yv.getAudioPlayer().right.size(), 0, 1) * yv.PI) * 200, 0, 255 - yv.sin(yv.map(j, 0, yv.getAudioPlayer().right.size(), 1, 0) * yv.PI) * 200);
+            float r = yv.map(j, 0, yv.getAudioPlayer().right.size(), 0, 2 * yv.PI); //the place of each line of the circle
+            float s = yv.abs(yv.getAudioPlayer().right.get(j)) * stick; //length of the line
             yv.line(yv.sin(r) * (radius), yv.cos(r) * (radius), yv.sin(r) * (s + radius), yv.cos(r) * (s + radius));
          }
          yv.popMatrix();
