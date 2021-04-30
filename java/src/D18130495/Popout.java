@@ -25,13 +25,13 @@ public class Popout
         //create circle from four different direction and add them to four arraylists
         for(int i = 0; i < 1; i++) {
             if(yv.getBands()[i] != 0) {
-                Circle c1 = new Circle(yv.width / 2, 0, (int)yv.random(yv.getBands()[i], yv.getBands()[i] * 1.2f));
+                Circle c1 = new Circle(yv.width / 2, 0, (int)yv.random(yv.getBands()[i] * 0.6f, yv.getBands()[i] * 0.8f));
                 circle1.add(c1);
-                Circle c2 = new Circle(yv.width / 2, yv.height, (int)yv.random(yv.getBands()[i], yv.getBands()[i] * 1.2f));
+                Circle c2 = new Circle(yv.width / 2, yv.height, (int)yv.random(yv.getBands()[i] * 0.6f, yv.getBands()[i] * 0.8f));
                 circle2.add(c2);
-                Circle c3 = new Circle(0, yv.height / 2, (int)yv.random(yv.getBands()[i], yv.getBands()[i] * 1.2f));
+                Circle c3 = new Circle(0, yv.height / 2, (int)yv.random(yv.getBands()[i] * 0.6f, yv.getBands()[i] * 0.8f));
                 circle3.add(c3);
-                Circle c4 = new Circle(yv.width, yv.height / 2, (int)yv.random(yv.getBands()[i], yv.getBands()[i] * 1.2f));
+                Circle c4 = new Circle(yv.width, yv.height / 2, (int)yv.random(yv.getBands()[i] * 0.6f, yv.getBands()[i] * 0.8f));
                 circle4.add(c4);
             }
             
