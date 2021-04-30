@@ -7,9 +7,9 @@ Student Number: D18130495
 # Description of the assignment
 Wellcome to YushunVisual! In this assignment You will experience four different visual effects. There is a controller that can help you easily switch between each visual.
 
-The first music use for visual 1 - 3. ![An music](java/data/music.mp3)
+The first music use for visual 1 - 3. [![An music](java/data/music.jpg)](java/data/music.mp3)
 
-The second music use for visual 4. ![An music](java/data/music1.mp3)
+The second music use for visual 4. [![An music](java/data/music1.jpg)](java/data/music1.mp3)
 
 1. First visual: In this visual, there are two big circles represent two different channels, inner circle for left channel and outer for right channel.
 				 Also, there are some polygons as background and they can shake, the width of the edges of each polygon can become more width depend on the amplitude of the audio.
@@ -134,7 +134,7 @@ PImage image = loadImage("1.png"); //load image
 
 | For which visual | What I learned |
 |-----------|-----------|
-|visual 1 | vertex(), beginShape(), endShape(), millis(), usage of sin and cos, usage of different channels |
+|visual 1 | vertex(), beginShape(), endShape(), usage of sin and cos, usage of different channels |
 |visual 3 | practice concept of object oriented |
 |visual 4 | Pimage class, PVector class, brigthness() |
 
@@ -163,9 +163,10 @@ PImage image = loadImage("1.png");
 3. The last thing that makes me proud is connected Main.java, YushunVisual.java and Control.java together.
 - This help me better understand how the object worked in different class.
 # Youtube video
-## Visual 1 - 3
+## Visual 1 - 3()
+[![YouTube](http://img.youtube.com/vi/_THaqqJAlP0/0.jpg)](https://youtu.be/_THaqqJAlP0)
 ## visual 4
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
+[![YouTube](http://img.youtube.com/vi/Z1OZTRxAJQs/0.jpg)](https://youtu.be/Z1OZTRxAJQs)
 
 
 
