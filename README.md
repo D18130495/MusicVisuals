@@ -7,9 +7,9 @@ Student Number: D18130495
 # Description of the assignment
 Wellcome to YushunVisual! In this assignment You will experience four different visual effects. There is a controller that can help you easily switch between each visual.
 
-The first music use for visual 1 - 3. [![An music](java/data/music.jpg)](java/data/music.mp3)
+The first music use for visual 1 - 3. [![An music](D:\桌面文件\D18130495\OOP\OOP-Assignment\MusicVisuals\java\data\music.jpg)](java/data/music.mp3)
 
-The second music use for visual 4. [![An music](java/data/music1.jpg)](java/data/music1.mp3)
+The second music use for visual 4. [![An music](D:\桌面文件\D18130495\OOP\OOP-Assignment\MusicVisuals\java\data\music1.jpg)](java/data/music1.mp3)
 
 1. First visual: In this visual, there are two big circles represent two different channels, inner circle for left channel and outer for right channel.
 				 Also, there are some polygons as background and they can shake, the width of the edges of each polygon can become more width depend on the amplitude of the audio.
@@ -163,9 +163,9 @@ PImage image = loadImage("1.png");
 3. The last thing that makes me proud is connected Main.java, YushunVisual.java and Control.java together.
 - This help me better understand how the object worked in different class.
 # Youtube video
-## Visual 1 - 3()
+## Visual 1 - 3(recommended to wear headphones)
 [![YouTube](http://img.youtube.com/vi/_THaqqJAlP0/0.jpg)](https://youtu.be/_THaqqJAlP0)
-## visual 4
+## visual 4(recommended to wear headphones)
 [![YouTube](http://img.youtube.com/vi/Z1OZTRxAJQs/0.jpg)](https://youtu.be/Z1OZTRxAJQs)
 
 
