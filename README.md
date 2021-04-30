@@ -61,10 +61,29 @@ To achieve this effect I use sin and pi.
 ```Java
 255 - yv.sin(yv.map(i, 0, yv.getAudioPlayer().left.size(), 0, 1) * yv.PI) * 200, 0, yv.sin(yv.map(i, 0, yv.getAudioPlayer().left.size(), 0, 1) * yv.PI) * 200);
 ```
-First use map function, beacse i is always growing, so the value after map is also growing, the R(red) value is continuous decline and B(blue) value is increase, after achieve map value is greater than 0.5, the R(red) value is increase and B(blue) value is decline, so this can fill the circle appropriatly.
+First use map function, beacse i is always growing, so the value after map is also growing, the R(red) value is continuous decline and B(blue) value is increase, after achieve map value is greater than 0.5, the R(red) value is increase and B(blue) value is decline, so this can fill the circle appropriately.
+
+For the second elements, how to make the polygons shake is the most difficult part.
+```Java
+float radian = yv.cos(yv.radians(yv.millis()/10 + 20 * d));
+float r = radius + yv.map(radian, -1, 1, -changeRange, changeRange);
+```
+I use millis() to return the number, because it will return the milliseconds (thousandths of a second) so the gap between each number is dig.
 ## Second visual: Rain
+1. This part have three elements on it, a circle that use sticks formed, small circles can change size depend on the music, and some line on the top and bottom to make visual more Beautiful.
+2. Use sin and cos make sticks form a circle and same idea to make small circle under the sticks.
+3. There are not have too much difficulties to achieve in this part. It just requires a lot of calculations and running tests.
 ## Third visual: Pop-out
+1. In this part, lots of colorful small circles will be formed at the center of the edges from four sides, and move to the center of the screen.
+2. I created circle.java to generate circles, and update function to make circle to move. In the Popout.java I created four arraylist for four different directions, and each arraylist store the circles and can call them own update function.
+3. The main idea for this part is the usage of object. Create each object and call the function they have.
 ## Fourth visual: Draw
+1. In this visual, lots of small pixel objects will be created finally form an image.
+2. This is the most excited part I made in this assignment, it use lots of processing method and OOP concept.
+- Firstly, I use PImage data type to load image in to YushunVisual.java. After this I parsing the image, there are 1024 X 640(the size of the screen) pixels on the screen, use two loops to traverse each piexl and use brightness() function to determine which pixels have to be store in the pixel arraylist. (brightness() will return the highest value color of (R, G, B))
+- Secondly, I created rect.java, this is use to create pixel object. After Draw.java is called, randow pixel will be pickes in the pixel arraylist and add to the rect arraylist. After add to the rect arraylist, the pixel will be removed from pixel arraylist, this is for avoid repeatedly add same pixel to rect arraylist.
+- Thirdly, rect object will be created according to the rect arraylist and draw on the screen, rect will be created depend on the size of rect arraylist and music amplitude. Because there are thousand of pixels shoule be drawn on the screen, so I gradually increase the generation speed of pixel.
+3. In this part, I spend the most time on music synchronization and running tests, I also chose a special music for better showing music synchronization and better looking experice.
 # What I am most proud of in the assignment
 
 # Markdown Tutorial
