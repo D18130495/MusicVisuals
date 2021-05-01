@@ -80,7 +80,7 @@ First of all, I have to say thanks to last year students' assignment which inspi
 3. The implementation of this visual have two difficulties which make me think a lot.
 - The main difficulty of the first element is how to fill the color and make it looks beautiful. If I just fill this circle with rainbow color, the start color is red and end color is blue, this two color will link together and looks uncomfortable.
 ![An image](images/how1.PNG)
-So, I try two combine two rainbow color together, make two rainbows red color link together and blue color link together.
+So, I try to combine two rainbow color together, make two rainbows red color link together and blue color link together.
 Start with red and end with blue(left) range(3pi / 2 - pi / 2), start with red and end with blue(right) range(- pi / 2, pi / 2).
 ![An image](images/how2.PNG)
 To achieve this effect I use sin and pi.
